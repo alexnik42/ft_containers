@@ -1,404 +1,329 @@
-In file included from ../vector_tests/operator >=.cpp:1:
-In file included from ../vector_tests/../system/system_methods.ipp:2:
-In file included from ../vector_tests/../system/lib.hpp:30:
-../vector_tests/../system/Alloc.hpp:55:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
-template <class _Up, class... _Args>
-                          ^
-../vector_tests/../system/Alloc.hpp:58:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
-        construct(_Up* __p, _Args&&... __args)
-                                 ^
-../vector_tests/../system/Alloc.hpp:164:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
-template <class _Up, class... _Args>
-                          ^
-../vector_tests/../system/Alloc.hpp:167:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
-        construct(_Up* __p, _Args&&... __args)
-                                 ^
-In file included from ../vector_tests/operator >=.cpp:2:
-In file included from ../vector_tests/__service.ipp:3:
-../vector_tests/../../../Vector.hpp:166:19: error: declaration of 'T' shadows template parameter
-  template <class T, class Alloc>
-                  ^
-../vector_tests/../../../Vector.hpp:23:20: note: template parameter is declared here
-template <typename T, class Allocator = std::allocator<T> >
-                   ^
-../vector_tests/../../../Vector.hpp:177:19: error: declaration of 'T' shadows template parameter
-  template <class T, class Alloc>
-                  ^
-../vector_tests/../../../Vector.hpp:23:20: note: template parameter is declared here
-template <typename T, class Allocator = std::allocator<T> >
-                   ^
-../vector_tests/../../../Vector.hpp:167:15: error: redefinition of 'operator=='
-  friend bool operator==(const Vector<T, Alloc>& lhs,
-              ^
-../vector_tests/operator >=.cpp:9:21: note: in instantiation of template class 'ft::Vector<std::string>' requested here
-    _vector<string> V_str1, V_str2;
-                    ^
-../vector_tests/../../../Vector.hpp:167:15: note: previous definition is here
-  friend bool operator==(const Vector<T, Alloc>& lhs,
-              ^
-../vector_tests/../../../Vector.hpp:178:15: error: redefinition of 'operator!='
-  friend bool operator!=(const Vector<T, Alloc>& lhs,
-              ^
-../vector_tests/../../../Vector.hpp:178:15: note: previous definition is here
 ../vector_tests/operator >=.cpp:23:31: error: invalid operands to binary expression ('ft::Vector<int>' and 'ft::Vector<int>')
     result_2.push_back(V_int1 >= V_int2);
                        ~~~~~~ ^  ~~~~~~
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/utility:608:1: note: candidate template ignored: could not match 'pair' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:612:1: note: candidate template ignored: could not match 'pair' against 'Vector'
 operator>=(const pair<_T1,_T2>& __x, const pair<_T1,_T2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:835:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:744:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
 operator>=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1291:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1185:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
 operator>=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1667:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1561:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1699:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1593:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:1974:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:2995:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, const unique_ptr<_T2, _D2>& __y) {return !(__x < __y);}
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2061:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3082:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, nullptr_t)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2069:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3090:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(nullptr_t, const unique_ptr<_T1, _D1>& __x)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3446:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4842:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3534:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4930:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, nullptr_t) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3542:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4938:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(nullptr_t, const shared_ptr<_Tp>& __x) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/array:414:1: note: candidate template ignored: could not match 'array' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:413:1: note: candidate template ignored: could not match 'array' against 'Vector'
 operator>=(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:3370:1: note: candidate template ignored: could not match 'vector' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:3394:1: note: candidate template ignored: could not match 'vector' against 'Vector'
 operator>=(const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:1632:1: note: candidate template ignored: could not match 'map' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:1595:1: note: candidate template ignored: could not match 'map' against 'Vector'
 operator>=(const map<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:2217:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:2140:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
 operator>=(const multimap<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:936:1: note: candidate template ignored: could not match 'set' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:895:1: note: candidate template ignored: could not match 'set' against 'Vector'
 operator>=(const set<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:1463:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:1383:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
 operator>=(const multiset<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/deque:3002:1: note: candidate template ignored: could not match 'deque' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:2914:1: note: candidate template ignored: could not match 'deque' against 'Vector'
 operator>=(const deque<_Tp, _Allocator>& __x, const deque<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack:288:1: note: candidate template ignored: could not match 'stack' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:289:1: note: candidate template ignored: could not match 'stack' against 'Vector'
 operator>=(const stack<_Tp, _Container>& __x, const stack<_Tp, _Container>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:788:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:749:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs, basic_string_view<_CharT, _Traits> __rhs) _NOEXCEPT
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:796:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:757:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs,
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:804:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
-bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs,
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:765:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4206:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4008:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4215:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4017:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4224:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<int>'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4026:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<int>'
 operator>=(const _CharT* __lhs,
 ^
 ../vector_tests/operator >=.cpp:25:31: error: invalid operands to binary expression ('ft::Vector<int>' and 'ft::Vector<int>')
     result_2.push_back(V_int1 >= V_int2);
                        ~~~~~~ ^  ~~~~~~
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/utility:608:1: note: candidate template ignored: could not match 'pair' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:612:1: note: candidate template ignored: could not match 'pair' against 'Vector'
 operator>=(const pair<_T1,_T2>& __x, const pair<_T1,_T2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:835:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:744:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
 operator>=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1291:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1185:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
 operator>=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1667:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1561:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1699:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1593:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:1974:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:2995:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, const unique_ptr<_T2, _D2>& __y) {return !(__x < __y);}
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2061:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3082:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, nullptr_t)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2069:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3090:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(nullptr_t, const unique_ptr<_T1, _D1>& __x)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3446:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4842:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3534:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4930:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, nullptr_t) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3542:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4938:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(nullptr_t, const shared_ptr<_Tp>& __x) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/array:414:1: note: candidate template ignored: could not match 'array' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:413:1: note: candidate template ignored: could not match 'array' against 'Vector'
 operator>=(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:3370:1: note: candidate template ignored: could not match 'vector' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:3394:1: note: candidate template ignored: could not match 'vector' against 'Vector'
 operator>=(const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:1632:1: note: candidate template ignored: could not match 'map' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:1595:1: note: candidate template ignored: could not match 'map' against 'Vector'
 operator>=(const map<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:2217:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:2140:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
 operator>=(const multimap<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:936:1: note: candidate template ignored: could not match 'set' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:895:1: note: candidate template ignored: could not match 'set' against 'Vector'
 operator>=(const set<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:1463:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:1383:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
 operator>=(const multiset<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/deque:3002:1: note: candidate template ignored: could not match 'deque' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:2914:1: note: candidate template ignored: could not match 'deque' against 'Vector'
 operator>=(const deque<_Tp, _Allocator>& __x, const deque<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack:288:1: note: candidate template ignored: could not match 'stack' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:289:1: note: candidate template ignored: could not match 'stack' against 'Vector'
 operator>=(const stack<_Tp, _Container>& __x, const stack<_Tp, _Container>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:788:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:749:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs, basic_string_view<_CharT, _Traits> __rhs) _NOEXCEPT
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:796:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:757:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs,
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:804:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
-bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs,
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:765:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4206:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4008:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4215:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4017:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4224:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<int>'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4026:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<int>'
 operator>=(const _CharT* __lhs,
 ^
 ../vector_tests/operator >=.cpp:26:31: error: invalid operands to binary expression ('ft::Vector<int>' and 'ft::Vector<int>')
     result_2.push_back(V_int1 >= V_int3);
                        ~~~~~~ ^  ~~~~~~
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/utility:608:1: note: candidate template ignored: could not match 'pair' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:612:1: note: candidate template ignored: could not match 'pair' against 'Vector'
 operator>=(const pair<_T1,_T2>& __x, const pair<_T1,_T2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:835:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:744:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
 operator>=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1291:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1185:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
 operator>=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1667:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1561:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1699:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1593:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:1974:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:2995:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, const unique_ptr<_T2, _D2>& __y) {return !(__x < __y);}
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2061:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3082:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, nullptr_t)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2069:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3090:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(nullptr_t, const unique_ptr<_T1, _D1>& __x)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3446:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4842:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3534:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4930:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, nullptr_t) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3542:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4938:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(nullptr_t, const shared_ptr<_Tp>& __x) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/array:414:1: note: candidate template ignored: could not match 'array' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:413:1: note: candidate template ignored: could not match 'array' against 'Vector'
 operator>=(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:3370:1: note: candidate template ignored: could not match 'vector' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:3394:1: note: candidate template ignored: could not match 'vector' against 'Vector'
 operator>=(const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:1632:1: note: candidate template ignored: could not match 'map' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:1595:1: note: candidate template ignored: could not match 'map' against 'Vector'
 operator>=(const map<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:2217:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:2140:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
 operator>=(const multimap<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:936:1: note: candidate template ignored: could not match 'set' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:895:1: note: candidate template ignored: could not match 'set' against 'Vector'
 operator>=(const set<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:1463:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:1383:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
 operator>=(const multiset<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/deque:3002:1: note: candidate template ignored: could not match 'deque' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:2914:1: note: candidate template ignored: could not match 'deque' against 'Vector'
 operator>=(const deque<_Tp, _Allocator>& __x, const deque<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack:288:1: note: candidate template ignored: could not match 'stack' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:289:1: note: candidate template ignored: could not match 'stack' against 'Vector'
 operator>=(const stack<_Tp, _Container>& __x, const stack<_Tp, _Container>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:788:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:749:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs, basic_string_view<_CharT, _Traits> __rhs) _NOEXCEPT
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:796:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:757:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs,
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:804:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
-bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs,
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:765:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4206:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4008:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4215:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4017:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4224:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<int>'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4026:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<int>'
 operator>=(const _CharT* __lhs,
 ^
-../vector_tests/operator >=.cpp:27:31: error: invalid operands to binary expression ('ft::Vector<string>' (aka 'Vector<basic_string<char> >') and 'ft::Vector<string>')
+../vector_tests/operator >=.cpp:27:31: error: invalid operands to binary expression ('ft::Vector<string>' (aka 'Vector<basic_string<char, char_traits<char>, allocator<char> > >') and 'ft::Vector<string>')
     result_2.push_back(V_str1 >= V_str2);
                        ~~~~~~ ^  ~~~~~~
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/utility:608:1: note: candidate template ignored: could not match 'pair' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:612:1: note: candidate template ignored: could not match 'pair' against 'Vector'
 operator>=(const pair<_T1,_T2>& __x, const pair<_T1,_T2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:835:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:744:1: note: candidate template ignored: could not match 'reverse_iterator' against 'Vector'
 operator>=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1291:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1185:1: note: candidate template ignored: could not match 'move_iterator' against 'Vector'
 operator>=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1667:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1561:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iterator:1699:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
-operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1593:1: note: candidate template ignored: could not match '__wrap_iter' against 'Vector'
+operator>=(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT_DEBUG
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:1974:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:2995:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, const unique_ptr<_T2, _D2>& __y) {return !(__x < __y);}
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2061:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3082:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(const unique_ptr<_T1, _D1>& __x, nullptr_t)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:2069:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3090:1: note: candidate template ignored: could not match 'unique_ptr' against 'Vector'
 operator>=(nullptr_t, const unique_ptr<_T1, _D1>& __x)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3446:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4842:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3534:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4930:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(const shared_ptr<_Tp>& __x, nullptr_t) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:3542:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4938:1: note: candidate template ignored: could not match 'shared_ptr' against 'Vector'
 operator>=(nullptr_t, const shared_ptr<_Tp>& __x) _NOEXCEPT
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/array:414:1: note: candidate template ignored: could not match 'array' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:413:1: note: candidate template ignored: could not match 'array' against 'Vector'
 operator>=(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:3370:1: note: candidate template ignored: could not match 'vector' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:3394:1: note: candidate template ignored: could not match 'vector' against 'Vector'
 operator>=(const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:1632:1: note: candidate template ignored: could not match 'map' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:1595:1: note: candidate template ignored: could not match 'map' against 'Vector'
 operator>=(const map<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map:2217:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:2140:1: note: candidate template ignored: could not match 'multimap' against 'Vector'
 operator>=(const multimap<_Key, _Tp, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:936:1: note: candidate template ignored: could not match 'set' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:895:1: note: candidate template ignored: could not match 'set' against 'Vector'
 operator>=(const set<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:1463:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:1383:1: note: candidate template ignored: could not match 'multiset' against 'Vector'
 operator>=(const multiset<_Key, _Compare, _Allocator>& __x,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/deque:3002:1: note: candidate template ignored: could not match 'deque' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:2914:1: note: candidate template ignored: could not match 'deque' against 'Vector'
 operator>=(const deque<_Tp, _Allocator>& __x, const deque<_Tp, _Allocator>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack:288:1: note: candidate template ignored: could not match 'stack' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:289:1: note: candidate template ignored: could not match 'stack' against 'Vector'
 operator>=(const stack<_Tp, _Container>& __x, const stack<_Tp, _Container>& __y)
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:788:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:749:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs, basic_string_view<_CharT, _Traits> __rhs) _NOEXCEPT
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:796:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:757:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
 bool operator>=(basic_string_view<_CharT, _Traits> __lhs,
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view:804:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
-bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs,
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:765:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+bool operator>=(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
      ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4206:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4008:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4215:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4017:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
 operator>=(const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:4224:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<string>' (aka 'Vector<basic_string<char> >')
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:4026:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<string>' (aka 'Vector<basic_string<char, char_traits<char>, allocator<char> > >')
 operator>=(const _CharT* __lhs,
 ^
-In file included from ../vector_tests/operator >=.cpp:2:
-In file included from ../vector_tests/__service.ipp:3:
-../vector_tests/../../../Vector.hpp:156:21: error: no matching function for call to 'max'
-      int new_cap = max(1, _size * 2);
-                    ^~~
-../vector_tests/operator >=.cpp:19:12: note: in instantiation of member function 'ft::Vector<int>::push_back' requested here
-    V_int1.push_back(1);
-           ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2667:1: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('int' vs. 'unsigned long')
-max(const _Tp& __a, const _Tp& __b)
+4 errors generated.
+/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:681:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+bool operator<(basic_string_view<_CharT, _Traits> __lhs,
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:689:6: note: candidate template ignored: could not match 'basic_string_view' against 'Vector'
+bool operator<(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3921:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+operator< (const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2658:1: note: candidate function template not viable: requires 3 arguments, but 2 were provided
-max(const _Tp& __a, const _Tp& __b, _Compare __comp)
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3930:1: note: candidate template ignored: could not match 'basic_string' against 'Vector'
+operator< (const basic_string<_CharT, _Traits, _Allocator>& __lhs,
 ^
-In file included from ../vector_tests/operator >=.cpp:2:
-In file included from ../vector_tests/__service.ipp:3:
-../vector_tests/../../../Vector.hpp:156:21: error: no matching function for call to 'max'
-      int new_cap = max(1, _size * 2);
-                    ^~~
-../vector_tests/operator >=.cpp:21:12: note: in instantiation of member function 'ft::Vector<std::string>::push_back' requested here
-    V_str1.push_back("aa");
-           ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2667:1: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('int' vs. 'unsigned long')
-max(const _Tp& __a, const _Tp& __b)
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3939:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::Vector<string>' (aka 'Vector<basic_string<char, char_traits<char>, allocator<char> > >')
+operator< (const _CharT* __lhs,
 ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2658:1: note: candidate function template not viable: requires 3 arguments, but 2 were provided
-max(const _Tp& __a, const _Tp& __b, _Compare __comp)
-^
-4 warnings and 10 errors generated.
-d long')
-max(const _Tp& __a, const _Tp& __b)
-^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2658:1: note: candidate function template not viable: requires 3 arguments, but 2 were provided
-max(const _Tp& __a, const _Tp& __b, _Compare __comp)
-^
-In file included from ../vector_tests/operator <.cpp:2:
-In file included from ../vector_tests/__service.ipp:3:
-../vector_tests/../../../Vector.hpp:156:21: error: no matching function for call to 'max'
-      int new_cap = max(1, _size * 2);
-                    ^~~
-../vector_tests/operator <.cpp:21:12: note: in instantiation of member function 'ft::Vector<std::string>::push_back' requested here
-    V_str1.push_back("aa");
-           ^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2667:1: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('int' vs. 'unsigned long')
-max(const _Tp& __a, const _Tp& __b)
-^
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:2658:1: note: candidate function template not viable: requires 3 arguments, but 2 were provided
-max(const _Tp& __a, const _Tp& __b, _Compare __comp)
-^
-4 warnings and 10 errors generated.
+4 errors generated.

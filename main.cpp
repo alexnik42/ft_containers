@@ -22,10 +22,22 @@ int main() {
   ft::Vector<int> arr;
   ft::Vector<int> arr2(std::allocator<int>);
   ft::Vector<int> arr3(5, 21);
-  std::vector<int> arr4;
-  arr4.push_back(21);
-  arr4.push_back(42);
-  arr4.push_back(84);
-  ft::Vector<int> arr5(arr4.begin(), arr4.end());
-  arr5.printVector();
+  ft::Vector<int> arr4(arr3);
+  ft::Vector<int> arr5 = arr4;
+  ft::Vector<int> arr6;
+  arr6.assign(10, 22);
+  // std::vector<int> arr4;
+  // arr4.push_back(21);
+  // arr4.push_back(42);
+  // arr4.push_back(84);
+  // ft::Vector<int> arr5(arr4.begin(), arr4.end());
+  arr6.insert(arr6.begin(), 42);
+  arr6.printVector();
+  std::cout << "Size: " << arr6.size() << std::endl;
+  arr6.insert(arr6.begin() + 3, 99);
+  std::cout << "Size: " << arr6.size() << std::endl;
+  arr6.printVector();
+  arr6.resize(15);
+  std::cout << "Size: " << arr6.size() << std::endl;
+  arr6.printVector();
 }
