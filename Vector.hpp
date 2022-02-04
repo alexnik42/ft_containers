@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:10:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/04 01:58:09 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:50:27 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ template <typename T, class Allocator = std::allocator<T> >
 class Vector {
  public:
   typedef Allocator allocator_type;
-  typedef ft::RandomAccessIterator<T> iterator;
-  typedef ft::RandomAccessIterator<const T> const_iterator;
-  typedef ft::ReverseIterator<T> reverse_iterator;
-  typedef ft::ReverseIterator<const T> const_reverse_iterator;
+    typedef ft::RandomAccessIterator<T> iterator;
+    typedef ft::RandomAccessIterator<const T> const_iterator;
+    typedef ft::ReverseIterator<T> reverse_iterator;
+    typedef ft::ReverseIterator<const T> const_reverse_iterator;
 
   typedef
       typename ft::iterator_traits<iterator>::difference_type difference_type;
@@ -200,6 +200,11 @@ class Vector {
   };
 
   void insert(iterator pos, size_type count, const value_type& value) {
+    try {
+      value_type x = value;
+    } catch (...) {
+      throw;
+    }
     if (count == 0) return;
     size_type insertIdx = static_cast<size_type>(std::distance(begin(), pos));
     if (size() + count > capacity()) {
@@ -225,6 +230,14 @@ class Vector {
   void insert(iterator pos, InputIt first, InputIt last,
               typename ft::enable_if<!ft::is_integral<InputIt>::value,
                                      InputIt>::type* = nullptr) {
+    try {
+      InputIt s = first;
+      while (s < last) {
+        value_type x = *s++;
+      }
+    } catch (...) {
+      throw;
+    }
     size_type count = static_cast<size_type>(std::distance(first, last));
     if (count == 0) return;
     size_type insertIdx = static_cast<size_type>(std::distance(begin(), pos));

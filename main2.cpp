@@ -33,6 +33,7 @@ public:
 template <typename T>
 std::vector<int> insert_test_1(std::vector<T> vector) {
     std::vector<int> v;
+    _ratio = 1;
     vector.assign(2600 * _ratio, 1);
     g_start1 = timer();
     v.push_back(*(vector.insert(vector.end() - 800 * _ratio, 44)));
@@ -59,6 +60,7 @@ std::vector<int> insert_test_1(std::vector<T> vector) {
 template <typename T>
 std::vector<int> insert_test_1(_vector<T> vector) {
     std::vector<int> v;
+    _ratio = 1;
     vector.assign(2600 * _ratio, 1);
     g_start2 = timer();
     v.push_back(*(vector.insert(vector.end() - 800 * _ratio, 44)));
