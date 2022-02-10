@@ -9,7 +9,7 @@
 #define STACK			"../../../Stack.hpp"
 #define MAP			  	"../../../Map.hpp"
 #define SET			  	"../../../Set.hpp"
-#define UTILITIES		"../../../utils/Utility.hpp"
+#define UTILITIES		"../../../utils"
 
 /* comment this to turn OFF flags (-WWW, -std=98) */
 // #define FLAGS
@@ -23,7 +23,7 @@
 #define	_set	 			ft::Set
 #define	_is_integral 		ft::is_integral
 #define	_enable_if 			ft::enable_if
-#define	_pair 				ft::pair
+#define	_pair 				ft::Pair
 #define	_make_pair 			ft::make_pair
 #define	_lexicographical	ft::lexicographical_compare
 #define	_equal				ft::equal

@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 02:13:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/09 17:58:11 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:14:02 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,155 +19,289 @@
 
 namespace ft {
 
-template <typename T1, typename T2>
+template <typename Key, typename T>
 struct Node {
-  Node(Pair<T1, T2> data)
+  Node(Pair<const Key, T> data)
       : data(data), parent(nullptr), left(nullptr), right(nullptr), color(1){};
-  Pair<T1, T2> data;
-  Node<T1, T2> *parent;
-  Node<T1, T2> *left;
-  Node<T1, T2> *right;
+  Pair<const Key, T> data;
+  Node<const Key, T> *parent;
+  Node<const Key, T> *left;
+  Node<const Key, T> *right;
   int color;  // 1 -> Red, 0 -> Black
 };
 
-template <typename T1, typename T2>
+template <typename Key, typename T>
 class RBTree {
  public:
-  RBTree() : _root(nullptr), ll(false), rr(false), rl(false), lr(false){};
+  typedef Node<const Key, T> Node;
 
-  Node<T1, T2> *search(const T1 &key, Node<T1, T2> *root) {
+  RBTree()
+      : _superRoot(nullptr),
+        _root(nullptr),
+        ll(false),
+        rr(false),
+        rl(false),
+        lr(false) {
+    _superRoot = new Node(Pair<const Key, T>());
+  };
+
+  Node *search(const T &key) { return searchHelp(key, _root); }
+
+  Node *searchHelp(const T &key, Node *root) {
     if (root == nullptr || root->data.first == key) {
       return root;
     } else {
       if (key < root->data.first) {
-        return search(key, root->left);
+        return searchHelp(key, root->left);
       } else {
-        return search(key, root->right);
+        return searchHelp(key, root->right);
       }
     }
   };
 
   // Rotation
-  Node<T1, T2> *rotateLeft(Node<T1, T2> *node) {
-    Node<T1, T2> *x = node->right;
-    Node<T1, T2> *y = x->left;
-    x->left = node;
-    node->right = y;
-    node->parent = x;
-    if (y != nullptr) {
-      y->parent = node;
-    }
-    return x;
-  }
+  // Node *rotateLeft(Node *node) {
+  //   Node *x = node->right;
+  //   Node *y = x->left;
+  //   x->left = node;
+  //   node->right = y;
+  //   node->parent = x;
+  //   if (y != nullptr) {
+  //     y->parent = node;
+  //   }
+  //   return x;
+  // }
 
-  Node<T1, T2> *rotateRight(Node<T1, T2> *node) {
-    Node<T1, T2> *x = node->left;
-    Node<T1, T2> *y = x->right;
-    x->right = node;
-    node->left = y;
-    node->parent = x;
-    if (y != nullptr) {
-      y->parent = node;
-    }
-    return x;
-  }
+  // Node *rotateRight(Node *node) {
+  //   Node *x = node->left;
+  //   Node *y = x->right;
+  //   x->right = node;
+  //   node->left = y;
+  //   node->parent = x;
+  //   if (y != nullptr) {
+  //     y->parent = node;
+  //   }
+  //   return x;
+  // }
 
-  Node<T1, T2> *insertHelp(Node<T1, T2> *root, Pair<T1, T2> data) {
-    bool f = false;  // Red Red Conflict
+  // Node *insertHelp(Node *root, Pair<const Key, T> data) {
+  //   bool f = false;  // Red Red Conflict
+  //   if (root == nullptr) {
+  //     return (new Node(data));
+  //   } else if (data.first < root->data.first) {
+  //     root->left = insertHelp(root->left, data);
+  //     root->left->parent = root;
+  //     if (root != _root) {
+  //       if (root->color == 1 && root->left->color == 1) {
+  //         f = true;
+  //       }
+  //     }
+  //   } else {
+  //     root->right = insertHelp(root->right, data);
+  //     root->right->parent = root;
+  //     if (root != _root) {
+  //       if (root->color == 1 && root->right->color == 1) {
+  //         f = true;
+  //       }
+  //     }
+  //   }
+
+  //   if (ll) {
+  //     root = rotateLeft(root);
+  //     root->color = 0;
+  //     root->left->color = 1;
+  //     ll = false;
+  //   } else if (rr) {
+  //     root = rotateRight(root);
+  //     root->color = 0;
+  //     root->right->color = 1;
+  //     rr = false;
+  //   } else if (rl) {
+  //     root->right = rotateRight(root->right);
+  //     root->right->parent = root;
+  //     root = rotateLeft(root);
+  //     root->color = 0;
+  //     root->left->color = 1;
+  //     rl = false;
+  //   } else if (lr) {
+  //     root->left = rotateLeft(root->left);
+  //     root->left->parent = root;
+  //     root = rotateRight(root);
+  //     root->color = 0;
+  //     root->right->color = 1;
+  //     lr = false;
+  //   }
+
+  //   if (f) {
+  //     if (root->parent->right == root) {
+  //       if (root->parent->left == nullptr || root->parent->left->color ==
+  //       0)
+  //       {
+  //         if (root->left != nullptr && root->left->color == 1) {
+  //           rl = true;
+  //         } else if (root->right != nullptr && root->right->color == 1) {
+  //           ll = true;
+  //         }
+  //       } else {
+  //         root->parent->left->color = 0;
+  //         root->color = 0;
+  //         if (root->parent != _root) {
+  //           root->parent->color = 1;
+  //         }
+  //       }
+  //     } else {
+  //       if (root->parent->right == nullptr || root->parent->right->color
+  //       == 0) {
+  //         if (root->left != nullptr && root->left->color == 1) {
+  //           rr = true;
+  //         } else if (root->right != nullptr && root->right->color == 1) {
+  //           lr = true;
+  //         }
+  //       } else {
+  //         root->parent->right->color = 0;
+  //         root->color = 0;
+  //         if (root->parent != _root) {
+  //           root->parent->color = 1;
+  //         }
+  //       }
+  //     }
+  //     f = false;
+  //   }
+  //   return root;
+  // }
+
+  Node *insertInTheTree(Node *root, Node *pt) {
     if (root == nullptr) {
-      return (new Node<T1, T2>(data));
-    } else if (data.first < root->data.first) {
-      root->left = insertHelp(root->left, data);
-      root->left->parent = root;
-      if (root != _root) {
-        if (root->color && root->left->color) {
-          f = true;
-        }
-      }
-    } else {
-      root->right = insertHelp(root->right, data);
-      root->right->parent = root;
-      if (root != _root) {
-        if (root->color && root->right->color) {
-          f = true;
-        }
-      }
+      return pt;
     }
 
-    if (ll) {
-      root = rotateLeft(root);
-      root->color = 0;
-      root->left->color = 1;
-      ll = false;
-    } else if (rr) {
-      root = rotateRight(root);
-      root->color = 0;
-      root->right->color = 1;
-      rr = false;
-    } else if (rl) {
-      root->right = rotateRight(root->right);
-      root->right->parent = root;
-      root = rotateLeft(root);
-      root->color = 0;
-      root->left->color = 1;
-      rl = false;
-    } else if (lr) {
-      root->left = rotateLeft(root->left);
+    if (pt->data.first < root->data.first) {
+      root->left = insertInTheTree(root->left, pt);
       root->left->parent = root;
-      root = rotateRight(root);
-      root->color = 0;
-      root->right->color = 1;
-      lr = false;
-    }
-
-    if (f) {
-      if (root->parent->right == root) {
-        if (root->parent->left == nullptr || root->parent->left->color == 0) {
-          if (root->left != nullptr && root->left->color == 1) {
-            rl = true;
-          } else if (root->right != nullptr && root->right->color == 1) {
-            ll = true;
-          }
-        } else {
-          root->parent->left->color = 0;
-          root->color = 0;
-          if (root->parent != _root) {
-            root->parent->color = 1;
-          }
-        }
-      } else {
-        if (root->parent->right == nullptr || root->parent->right->color == 0) {
-          if (root->left != nullptr && root->left->color == 1) {
-            rr = true;
-          } else if (root->right != nullptr && root->right->color == 1) {
-            lr = true;
-          }
-        } else {
-          root->parent->right->color = 0;
-          root->color = 0;
-          if (root->parent != _root) {
-            root->parent->color = 1;
-          }
-        }
-      }
-      f = false;
+    } else if (pt->data.first > root->data.first) {
+      root->right = insertInTheTree(root->right, pt);
+      root->right->parent = root;
     }
     return root;
-  }
-
-  Node<T1, T2> *insert(Pair<T1, T2> data) {
-    if (_root == nullptr) {
-      _root = new Node<T1, T2>(data);
-      _root->color = 0;
-      return _root;
-    } else {
-      _root = insertHelp(_root, data);
-    }
-    return search(data.first, _root);
   };
 
-  void fixDeletion(Node<T1, T2> *x) {
-    Node<T1, T2> *s;
+  void rotateLeft(Node *&root, Node *&pt) {
+    Node *pt_right = pt->right;
+
+    pt->right = pt_right->left;
+
+    if (pt->right != nullptr) pt->right->parent = pt;
+
+    pt_right->parent = pt->parent;
+
+    if (pt->parent == nullptr)
+      root = pt_right;
+
+    else if (pt == pt->parent->left)
+      pt->parent->left = pt_right;
+
+    else
+      pt->parent->right = pt_right;
+
+    pt_right->left = pt;
+    pt->parent = pt_right;
+  }
+
+  void rotateRight(Node *&root, Node *&pt) {
+    Node *pt_left = pt->left;
+
+    pt->left = pt_left->right;
+
+    if (pt->left != nullptr) pt->left->parent = pt;
+
+    pt_left->parent = pt->parent;
+
+    if (pt->parent == nullptr)
+      root = pt_left;
+
+    else if (pt == pt->parent->left)
+      pt->parent->left = pt_left;
+
+    else
+      pt->parent->right = pt_left;
+
+    pt_left->right = pt;
+    pt->parent = pt_left;
+  }
+
+  void fixInsertion(Node *&root, Node *&pt) {
+    Node *parent_pt = nullptr;
+    Node *grand_parent_pt = nullptr;
+
+    while ((pt != root) && (pt->color != 0) && (pt->parent->color == 1)) {
+      parent_pt = pt->parent;
+      grand_parent_pt = pt->parent->parent;
+
+      if (parent_pt == grand_parent_pt->left) {
+        Node *uncle_pt = grand_parent_pt->right;
+
+        if (uncle_pt != nullptr && uncle_pt->color == 1) {
+          grand_parent_pt->color = 1;
+          parent_pt->color = 0;
+          uncle_pt->color = 0;
+          pt = grand_parent_pt;
+        }
+
+        else {
+          if (pt == parent_pt->right) {
+            rotateLeft(root, parent_pt);
+            pt = parent_pt;
+            parent_pt = pt->parent;
+          }
+          rotateRight(root, grand_parent_pt);
+          std::swap(parent_pt->color, grand_parent_pt->color);
+          pt = parent_pt;
+        }
+      }
+
+      else {
+        Node *uncle_pt = grand_parent_pt->left;
+
+        if ((uncle_pt != nullptr) && (uncle_pt->color == 1)) {
+          grand_parent_pt->color = 1;
+          parent_pt->color = 0;
+          uncle_pt->color = 0;
+          pt = grand_parent_pt;
+        } else {
+          if (pt == parent_pt->left) {
+            rotateRight(root, parent_pt);
+            pt = parent_pt;
+            parent_pt = pt->parent;
+          }
+
+          rotateLeft(root, grand_parent_pt);
+          std::swap(parent_pt->color, grand_parent_pt->color);
+          pt = parent_pt;
+        }
+      }
+    }
+
+    root->color = 0;
+  };
+
+  Node *insert(Pair<const Key, T> data) {
+    if (_root != nullptr) {
+      _root->parent = nullptr;
+      _superRoot->left = nullptr;
+    }
+    delete _superRoot;
+    Node *pt = new Node(data);
+    _root = insertInTheTree(_root, pt);
+    fixInsertion(_root, pt);
+
+    _superRoot = new Node(Pair<const Key, T>());
+    _root->parent = _superRoot;
+    _superRoot->left = _root;
+    return search(data.first);
+  };
+
+  void fixDeletion(Node *x) {
+    Node *s;
     while (x != _root && x->color == 0) {
       if (x == x->parent->left) {
         s = x->parent->right;
@@ -222,7 +356,7 @@ class RBTree {
     x->color = 0;
   }
 
-  void swapNodesForDeletion(Node<T1, T2> *u, Node<T1, T2> *v) {
+  void swapNodesForDeletion(Node *u, Node *v) {
     if (u->parent == nullptr) {
       _root = v;
     } else if (u == u->parent->left) {
@@ -233,9 +367,9 @@ class RBTree {
     v->parent = u->parent;
   }
 
-  void deleteHelp(Node<T1, T2> *root, const T1 &key) {
-    Node<T1, T2> *z = nullptr;
-    Node<T1, T2> *x, *y;
+  void deleteHelp(Node *root, const T &key) {
+    Node *z = nullptr;
+    Node *x, *y;
     while (root != nullptr) {
       if (root->data.first == key) {
         z = root;
@@ -279,40 +413,50 @@ class RBTree {
     }
   }
 
-  void deleteKey(const T1 &key) { deleteHelp(_root, key); }
+  void deleteKey(const T &key) { deleteHelp(_root, key); }
 
-  Node<T1, T2> *getMinimum(Node<T1, T2> *root) {
-    while (root->left != nullptr) {
+  Node *getMinimum(Node *root) {
+    while (root && root->left != nullptr) {
       root = root->left;
     }
     return root;
   }
 
-  Node<T1, T2> *getMaximum(Node<T1, T2> *root) {
-    while (root->right != nullptr) {
+  Node *getMaximum(Node *root) {
+    while (root && root->right != nullptr) {
       root = root->right;
     }
     return root;
   }
 
-  Node<T1, T2> *getRoot() { return _root; };
-  Node<T1, T2> *getMinNode() {
-    Node<T1, T2> *node = _root;
-    while (node->left != nullptr) {
+  Node *getRoot() { return _root; };
+  Node *getMinNode() {
+    if (_root == nullptr) {
+      return _superRoot;
+    }
+    Node *node = _root;
+    while (node && node->left != nullptr) {
       node = node->left;
     }
     return node;
   }
-  Node<T1, T2> *getMaxNode() {
-    Node<T1, T2> *node = _root;
-    while (node->right != nullptr) {
+  Node *getMaxNode() {
+    if (_root == nullptr) {
+      return _superRoot;
+    }
+    Node *node = _root;
+    while (node && node->right != nullptr) {
       node = node->right;
     }
     return node;
   }
 
+  Node *getBegin() { return getMinNode(); }
+  Node *getEnd() { return _superRoot; }
+
  private:
-  Node<T1, T2> *_root;
+  Node *_superRoot;
+  Node *_root;
   bool ll;
   bool rr;
   bool rl;
