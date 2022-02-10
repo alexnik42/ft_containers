@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:10:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/05 01:52:52 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/11 01:09:11 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ class Vector {
     }
     return _arr[pos];
   };
+  
   const_reference at(size_type pos) const {
     if (!(pos < size())) {
       throw std::out_of_range("Error: pos is out of range");

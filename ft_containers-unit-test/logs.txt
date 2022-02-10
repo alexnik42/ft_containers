@@ -1,15 +1,69 @@
-../map_tests/at().cpp:27:24: error: no member named 'at' in 'ft::Map<int, int, std::__1::less<int>, std::__1::allocator<ft::Pair<const int, int> > >'
-        v.push_back(mp.at(40 * _ratio));
-                    ~~ ^
-../map_tests/at().cpp:38:55: note: in instantiation of function template specialization 'at_test<int, int>' requested here
-    exit(run_map_unit_test<int, int>("at()", at_test, at_test));
-                                                      ^
-../map_tests/at().cpp:28:24: error: no member named 'at' in 'ft::Map<int, int, std::__1::less<int>, std::__1::allocator<ft::Pair<const int, int> > >'
-        v.push_back(mp.at(40 * _ratio + 1));
-                    ~~ ^
-2 errors generated.
-.hpp:119:28: note: candidate function not viable: requires single argument 'value', but 2 arguments were provided
-  ft::Pair<iterator, bool> insert(const value_type& value) {
-                           ^
-1 error generated.
-rs generated.
+In file included from ../map_tests/key_comp().cpp:1:
+In file included from ../map_tests/../system/system_methods.ipp:3:
+In file included from ../map_tests/../system/lib.hpp:30:
+../map_tests/../system/Alloc.hpp:55:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
+template <class _Up, class... _Args>
+                          ^
+../map_tests/../system/Alloc.hpp:58:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
+        construct(_Up* __p, _Args&&... __args)
+                                 ^
+../map_tests/../system/Alloc.hpp:164:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
+template <class _Up, class... _Args>
+                          ^
+../map_tests/../system/Alloc.hpp:167:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
+        construct(_Up* __p, _Args&&... __args)
+                                 ^
+../map_tests/key_comp().cpp:25:21: error: no member named 'key_comp' in 'ft::Map<int, int, std::greater<int> >'
+    v.push_back(mp2.key_comp()(1, 2));
+                ~~~ ^
+../map_tests/key_comp().cpp:26:21: error: no member named 'key_comp' in 'ft::Map<int, int, std::equal_to<int> >'
+    v.push_back(mp3.key_comp()(1, 2));
+                ~~~ ^
+../map_tests/key_comp().cpp:24:20: error: no member named 'key_comp' in 'ft::Map<int, int>'
+    v.push_back(mp.key_comp()(1, 2));
+                ~~ ^
+../map_tests/key_comp().cpp:32:62: note: in instantiation of function template specialization 'key_comp_test<int, int>' requested here
+    run_map_unit_test<int, int>("key_comp()", key_comp_test, key_comp_test);
+                                                             ^
+4 warnings and 3 errors generated.
+range(11);
+                                                                                          ~~ ^
+../map_tests/equal_range().cpp:45:94: error: no member named 'equal_range' in 'ft::Map<int, int>'
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair3 = mp.equal_range(1);
+                                                                                          ~~ ^
+4 warnings and 3 errors generated.
+      ~~ ^
+4 warnings and 6 errors generated.
+:mapped_type> *' (aka 'Node<const int, int> *') to 'ft::RBTreeIterator<int, const int>::node_pointer' (aka 'Node<const int, const int> *') for 1st argument
+  RBTreeIterator(node_pointer ptr) : _ptr(ptr){};
+  ^
+../map_tests/../../../utils/iterator.hpp:250:3: note: candidate constructor not viable: no known conversion from 'Node<const ft::Map<int, int>::key_type, ft::Map<int, int>::mapped_type> *' (aka 'Node<const int, int> *') to 'const ft::RBTreeIterator<int, const int>' for 1st argument
+  RBTreeIterator(const RBTreeIterator& other) { *this = other; };
+  ^
+../map_tests/../../../utils/iterator.hpp:248:3: note: candidate constructor not viable: requires 0 arguments, but 1 was provided
+  RBTreeIterator() : _ptr(nullptr){};
+  ^
+In file included from ../map_tests/count().cpp:2:
+In file included from ../map_tests/__service.ipp:3:
+../map_tests/../../../Map.hpp:120:39: error: no matching conversion for functional-style cast from 'ft::RBTree<int, int>::Node *' (aka 'Node<const int, int> *') to 'ft::Map<int, int>::const_iterator' (aka 'RBTreeIterator<int, const int>')
+  const_iterator end() const { return const_iterator(_rbtree->getEnd()); };
+                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../map_tests/../../../Map.hpp:186:63: note: in instantiation of member function 'ft::Map<int, int>::end' requested here
+  size_type count(const Key& key) const { return find(key) != end(); };
+                                                              ^
+../map_tests/count().cpp:18:20: note: in instantiation of member function 'ft::Map<int, int>::count' requested here
+    v.push_back(mp.count(0));
+                   ^
+../map_tests/count().cpp:26:61: note: in instantiation of function template specialization 'count_test<int, int>' requested here
+    exit(run_map_unit_test<int, int>("count()", count_test, count_test));
+                                                            ^
+../map_tests/../../../utils/iterator.hpp:249:3: note: candidate constructor not viable: no known conversion from 'ft::RBTree<int, int>::Node *' (aka 'Node<const int, int> *') to 'ft::RBTreeIterator<int, const int>::node_pointer' (aka 'Node<const int, const int> *') for 1st argument
+  RBTreeIterator(node_pointer ptr) : _ptr(ptr){};
+  ^
+../map_tests/../../../utils/iterator.hpp:250:3: note: candidate constructor not viable: no known conversion from 'ft::RBTree<int, int>::Node *' (aka 'Node<const int, int> *') to 'const ft::RBTreeIterator<int, const int>' for 1st argument
+  RBTreeIterator(const RBTreeIterator& other) { *this = other; };
+  ^
+../map_tests/../../../utils/iterator.hpp:248:3: note: candidate constructor not viable: requires 0 arguments, but 1 was provided
+  RBTreeIterator() : _ptr(nullptr){};
+  ^
+4 warnings and 2 errors generated.

@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:19:27 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/10 21:30:25 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/11 02:08:02 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,44 @@ class Map {
     *this = other;
   };
 
-  ~Map() { delete _rbtree; };  // leaks?
+  ~Map() { delete _rbtree; };  // check erase
 
   Map& operator=(const Map& other) {
-    // insert(first, last);
+    // const_iterator first = other.begin();
+    // const_iterator last = other.end();
+    // while (first != last) {
+    //   insert(*first++);
+    // }
     return *this;
   }
 
   allocator_type get_allocator() const { return _alloc; };
 
   // Element access
-  // T& at(const Key& key);
-  // const T& at(const Key& key) const;
-  T& operator[](const Key& key) {
+  mapped_type& at(const key_type& key) {
     Node<const Key, T>* res = _rbtree->search(key);
     if (res == nullptr) {
-      insert(ft::make_pair(key,
-                           mapped_type()));  // once iterator is added - fix
-      res = _rbtree->search(key);
+      throw std::out_of_range("Error: key not found");
+    } else {
+      return res->data.second;
     }
-    return res->data.second;
+  }
+  const mapped_type& at(const key_type& key) const {
+    Node<const key_type, mapped_type>* res = _rbtree->search(key);
+    if (res == nullptr) {
+      throw std::out_of_range("Error: key not found");
+    } else {
+      return res->data.second;
+    }
+  }
+
+  mapped_type& operator[](const key_type& key) {
+    Node<const key_type, mapped_type>* res = _rbtree->search(key);
+    if (res == nullptr) {
+      return (*insert(ft::make_pair(key, mapped_type())).first).second;
+    } else {
+      return res->data.second;
+    }
   }
 
   // Iterators
@@ -99,7 +117,6 @@ class Map {
   const_iterator begin() const { return const_iterator(_rbtree->getBegin()); };
 
   iterator end() { return iterator(_rbtree->getEnd()); };
-
   const_iterator end() const { return const_iterator(_rbtree->getEnd()); };
 
   // reverse_iterator rbegin();
@@ -111,10 +128,10 @@ class Map {
   // Capacity
   bool empty() const { return size() == 0; };
   size_type size() const { return _size; };
-  // size_type max_size() const;
+  size_type max_size() const { return allocator_type().max_size(); };
 
   // Modifiers
-  // void clear();
+  void clear() { erase(begin(), end()); };
 
   ft::Pair<iterator, bool> insert(const value_type& value) {
     if (empty()) {
@@ -141,17 +158,32 @@ class Map {
     }
   };
 
-  // void erase(iterator pos);
-  // void erase(iterator first, iterator last);
-  // size_type erase(const Key& key) {
-  //   _rbtree->deleteKey(key);
-  //   return 1;
-  // }
+  void erase(iterator pos) {
+    _rbtree->deleteKey((*pos).first);
+    _size--;
+  };
+
+  void erase(iterator first, iterator last) {
+    while (first != last) {
+      erase(first++);
+    }
+  }
+
+  size_type erase(const key_type& key) {
+    iterator res = find(key);
+    if (res != end()) {
+      _rbtree->deleteKey(key);
+      _size--;
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   // void swap(Map& other);
 
   // Lookup
-  // size_type count(const Key& key) const;
+  size_type count(const Key& key) const { return find(key) != end(); };
 
   iterator find(const Key& key) {
     Node<const key_type, mapped_type>* res = _rbtree->search(key);
@@ -162,7 +194,15 @@ class Map {
     }
   };
 
-  // const_iterator find(const Key& key) const;
+  const_iterator find(const Key& key) const {
+    Node<const key_type, mapped_type>* res = _rbtree->search(key);
+    if (res == nullptr) {
+      return end();
+    } else {
+      return const_iterator(res);
+    }
+  }
+
   // ft::Pair<iterator, iterator> equal_range(const Key& key);
   // ft::Pair<const_iterator, const_iterator> equal_range(const Key& key) const;
   // iterator lower_bound(const Key& key);

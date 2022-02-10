@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 02:13:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/10 21:14:02 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/11 02:01:39 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ class RBTree {
     return root;
   };
 
-  void rotateLeft(Node *&root, Node *&pt) {
+  void rotateLeftInsertion(Node *&root, Node *&pt) {
     Node *pt_right = pt->right;
 
     pt->right = pt_right->left;
@@ -207,7 +207,7 @@ class RBTree {
     pt->parent = pt_right;
   }
 
-  void rotateRight(Node *&root, Node *&pt) {
+  void rotateRightInsertion(Node *&root, Node *&pt) {
     Node *pt_left = pt->left;
 
     pt->left = pt_left->right;
@@ -249,11 +249,11 @@ class RBTree {
 
         else {
           if (pt == parent_pt->right) {
-            rotateLeft(root, parent_pt);
+            rotateLeftInsertion(root, parent_pt);
             pt = parent_pt;
             parent_pt = pt->parent;
           }
-          rotateRight(root, grand_parent_pt);
+          rotateRightInsertion(root, grand_parent_pt);
           std::swap(parent_pt->color, grand_parent_pt->color);
           pt = parent_pt;
         }
@@ -269,12 +269,12 @@ class RBTree {
           pt = grand_parent_pt;
         } else {
           if (pt == parent_pt->left) {
-            rotateRight(root, parent_pt);
+            rotateRightInsertion(root, parent_pt);
             pt = parent_pt;
             parent_pt = pt->parent;
           }
 
-          rotateLeft(root, grand_parent_pt);
+          rotateLeftInsertion(root, grand_parent_pt);
           std::swap(parent_pt->color, grand_parent_pt->color);
           pt = parent_pt;
         }
@@ -294,11 +294,49 @@ class RBTree {
     _root = insertInTheTree(_root, pt);
     fixInsertion(_root, pt);
 
+    // _root = insertHelp(_root, data);
+
     _superRoot = new Node(Pair<const Key, T>());
     _root->parent = _superRoot;
     _superRoot->left = _root;
     return search(data.first);
   };
+
+  void leftRotateDeletion(Node *x) {
+    Node *y = x->right;
+    x->right = y->left;
+    if (y->left != nullptr) {
+      y->left->parent = x;
+    }
+    y->parent = x->parent;
+    if (x->parent == nullptr) {
+      _root = y;
+    } else if (x == x->parent->left) {
+      x->parent->left = y;
+    } else {
+      x->parent->right = y;
+    }
+    y->left = x;
+    x->parent = y;
+  }
+
+  void rightRotateDeletion(Node *x) {
+    Node *y = x->left;
+    x->left = y->right;
+    if (y->right != nullptr) {
+      y->right->parent = x;
+    }
+    y->parent = x->parent;
+    if (x->parent == nullptr) {
+      _root = y;
+    } else if (x == x->parent->right) {
+      x->parent->right = y;
+    } else {
+      x->parent->left = y;
+    }
+    y->right = x;
+    x->parent = y;
+  }
 
   void fixDeletion(Node *x) {
     Node *s;
@@ -308,7 +346,7 @@ class RBTree {
         if (s->color == 1) {
           s->color = 0;
           x->parent->color = 1;
-          rotateLeft(x->parent);  // double check | different implementations
+          leftRotateDeletion(x->parent);
           s = x->parent->right;
         }
         if (s->left->color == 0 && s->right->color == 0) {
@@ -318,13 +356,13 @@ class RBTree {
           if (s->right->color == 0) {
             s->left->color = 0;
             s->color = 1;
-            rotateRight(s);
+            rightRotateDeletion(s);
             s = x->parent->right;
           }
           s->color = x->parent->color;
           x->parent->color = 0;
           s->right->color = 0;
-          rotateLeft(x->parent);
+          leftRotateDeletion(x->parent);
           x = _root;
         }
       } else {
@@ -332,7 +370,7 @@ class RBTree {
         if (s->color == 1) {
           s->color = 0;
           x->parent->color = 1;
-          rotateRight(x->parent);
+          rightRotateDeletion(x->parent);
           s = x->parent->left;
         }
         if (s->right->color == 0 && s->right->color == 0) {
@@ -342,13 +380,13 @@ class RBTree {
           if (s->left->color == 0) {
             s->right->color = 0;
             s->color = 1;
-            rotateLeft(s);
+            leftRotateDeletion(s);
             s = x->parent->left;
           }
           s->color = x->parent->color;
           x->parent->color = 0;
           s->left->color = 0;
-          rotateRight(x->parent);
+          rightRotateDeletion(x->parent);
           x = _root;
         }
       }
