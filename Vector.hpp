@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:10:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/04 21:50:27 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/05 01:52:52 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ class Vector {
           capacity() * 2 >= size() + count ? capacity() * 2 : size() + count;
       reserve(newCapacity);
     }
-    if (size() == 0) {
+    if (empty()) {
       assign(count, value);
     } else {
       for (size_type i = size() - 1; i >= insertIdx; --i) {
@@ -246,7 +246,7 @@ class Vector {
           capacity() * 2 >= size() + count ? capacity() * 2 : size() + count;
       reserve(newCapacity);
     }
-    if (size() == 0) {
+    if (empty()) {
       assign(first, last);
     } else {
       for (size_type i = size() - 1; i >= insertIdx; --i) {

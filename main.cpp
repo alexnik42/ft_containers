@@ -29,7 +29,7 @@ int main() {
   }
   ft::Vector<int> arr7;
   arr7.assign(5, -10);
-  arr6.printVector();
+  // arr6.printVector();
   // std::vector<int> arr4;
   // arr4.push_back(21);
   // arr4.push_back(42);

@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:06:59 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/04 20:39:26 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/05 02:18:23 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+
+#include "utils/red_black_tree.hpp"
 
 int main() {
   int n = 1;
@@ -35,11 +37,12 @@ int main() {
   std::cout << "The value of p2 is "
             << "(" << p2.first << ", " << *(p2.second + 2) << ")\n";
 
-  std::vector<ft::Pair<int, std::string>> v = {
+  std::vector<ft::Pair<int, std::string> > v = {
       {2, "baz"}, {2, "bar"}, {1, "foo"}};
   std::sort(v.begin(), v.end());
 
   for (auto p : v) {
     std::cout << "{" << p.first << ", " << std::quoted(p.second) << "}\n";
   }
+  ft::Node<std::string, int> newNode;
 }

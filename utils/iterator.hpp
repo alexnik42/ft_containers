@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:44:11 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/03 23:56:20 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:56:45 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
+
+#include "red_black_tree.hpp"
 
 namespace ft {
 
@@ -221,6 +223,111 @@ class ReverseIterator {
 
  private:
   pointer _ptr;
+};
+
+template <typename Key, typename T>
+class RBTreeIterator {
+ private:
+  node_pointer _ptr;
+
+ public:
+  typedef typename std::bidirectional_iterator_tag iterator_category;
+
+  typedef Node<Key, T> node;
+  typedef node* node_pointer;
+
+  typedef std::ptrdiff_t difference_type;
+
+  typedef Pair<const Key, T> value_type;
+  typedef value_type* pointer;
+  typedef const value_type* const_pointer;
+  typedef value_type& reference;
+  typedef const value_type& const_reference;
+
+  RBTreeIterator() : _ptr(nullptr){};
+  RBTreeIterator(node_pointer ptr) : _ptr(ptr){};
+  RBTreeIterator(const RBTreeIterator& other) { *this = other; };
+
+  RBTreeIterator& operator=(const RBTreeIterator& other) {
+    _ptr = other._ptr;
+    return *this;
+  };
+
+  reference operator*() { return _ptr->data; }
+  pointer operator->() { return &(_ptr->data); }
+
+  const_reference operator*() const { return _ptr->data; }
+  const_pointer operator->() const { return &(_ptr->data); }
+
+  RBTreeIterator operator++() {
+    _ptr = successor(_ptr);
+    return *this;
+  }
+
+  RBTreeIterator operator++(int) {
+    RBTreeIterator tmp = *this;
+    operator++();
+    return tmp;
+  }
+
+  RBTreeIterator operator--() {
+    _ptr = predecessor(_ptr);
+    return *this;
+  }
+
+  RBTreeIterator operator--(int) {
+    RBTreeIterator tmp = *this;
+    operator--();
+    return tmp;
+  }
+
+  friend bool operator==(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
+    return lhs._ptr == rhs._ptr;
+  }
+  friend bool operator!=(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
+    return lhs._ptr != rhs._ptr;
+  }
+
+ private:
+  node_pointer getMinElementOnThePath(node_pointer node) {
+    while (node->left) {
+      node = node->left;
+    }
+    return node;
+  }
+
+  node_pointer getMaxElementOnThePath(node_pointer node) {
+    while (node->right) {
+      node = node->right;
+    }
+    return node;
+  }
+
+  node_pointer predecessor(node_pointer node) {
+    node_pointer parent = node->parent;
+    if (node->left) {
+      return getMaxElementOnThePath(node->left);
+    } else {
+      while (parent && node == parent->left) {
+        node = parent;
+        parent = parent->parent;
+      }
+    }
+    return parent;
+  }
+
+  node_pointer successor(node_pointer node) {
+    node_pointer parent = node->parent;
+    if (node->right) {
+      return getMinElementOnThePath(node->right);
+    } else {
+      while (parent && node == parent->right) {
+        node = parent;
+        parent = parent->parent;
+      }
+    }
+    return parent;
+  }
 };
 
 }  // namespace ft
