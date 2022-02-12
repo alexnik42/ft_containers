@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:19:27 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/11 02:08:02 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:06:13 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,17 @@ template <typename Key, typename T, class Compare = std::less<Key>,
 class Map {
  public:
   typedef Allocator allocator_type;
-  typedef ft::RBTreeIterator<Key, T> iterator;
-  typedef ft::RBTreeIterator<Key, const T> const_iterator;
-  typedef ft::RBTreeReverseIterator<Key, T> reverse_iterator;
-  typedef ft::RBTreeReverseIterator<Key, const T> const_reverse_iterator;
-
   typedef Key key_type;
   typedef T mapped_type;
+
+  typedef ft::Pair<const Key, T> value_type;
+  typedef ft::RBTreeIterator<value_type> iterator;
+  typedef ft::RBTreeIterator<const value_type> const_iterator;
+  // typedef ft::RBTreeReverseIterator<value_type> reverse_iterator;
+  // typedef ft::RBTreeReverseIterator<const value_type> const_reverse_iterator;
+
   typedef
       typename ft::iterator_traits<iterator>::difference_type difference_type;
-  typedef ft::Pair<const Key, T> value_type;
   typedef typename allocator_type::size_type size_type;
   typedef Compare key_compare;
 
@@ -75,10 +76,11 @@ class Map {
   ~Map() { delete _rbtree; };  // check erase
 
   Map& operator=(const Map& other) {
-    // const_iterator first = other.begin();
+    const_iterator first = other.begin();
     // const_iterator last = other.end();
     // while (first != last) {
-    //   insert(*first++);
+    //   insert(make_pair((*first).first, (*first).second));
+    //   first++;
     // }
     return *this;
   }
@@ -87,37 +89,37 @@ class Map {
 
   // Element access
   mapped_type& at(const key_type& key) {
-    Node<const Key, T>* res = _rbtree->search(key);
-    if (res == nullptr) {
+    iterator res = _rbtree->search(ft::make_pair(key, mapped_type()));
+    if (res == end()) {
       throw std::out_of_range("Error: key not found");
     } else {
-      return res->data.second;
+      return (*res).second;
     }
   }
   const mapped_type& at(const key_type& key) const {
-    Node<const key_type, mapped_type>* res = _rbtree->search(key);
-    if (res == nullptr) {
+    iterator res = _rbtree->search(ft::make_pair(key, mapped_type()));
+    if (res == end()) {
       throw std::out_of_range("Error: key not found");
     } else {
-      return res->data.second;
+      return (*res).second;
     }
   }
 
   mapped_type& operator[](const key_type& key) {
-    Node<const key_type, mapped_type>* res = _rbtree->search(key);
-    if (res == nullptr) {
+    iterator res = _rbtree->search(ft::make_pair(key, mapped_type()));
+    if (res == end()) {
       return (*insert(ft::make_pair(key, mapped_type())).first).second;
     } else {
-      return res->data.second;
+      return (*res).second;
     }
   }
 
   // Iterators
-  iterator begin() { return iterator(_rbtree->getBegin()); };
-  const_iterator begin() const { return const_iterator(_rbtree->getBegin()); };
+  iterator begin() { return _rbtree->begin(); };
+  const_iterator begin() const { return _rbtree->begin(); };
 
-  iterator end() { return iterator(_rbtree->getEnd()); };
-  const_iterator end() const { return const_iterator(_rbtree->getEnd()); };
+  iterator end() { return _rbtree->end(); };
+  const_iterator end() const { return _rbtree->end(); };
 
   // reverse_iterator rbegin();
   // const_reverse_iterator rbegin() const;
@@ -135,11 +137,11 @@ class Map {
 
   ft::Pair<iterator, bool> insert(const value_type& value) {
     if (empty()) {
-      _rbtree = new RBTree<key_type, mapped_type>();
+      _rbtree = new RBTree<value_type>();
     }
     iterator res = find(value.first);
     if (res == end()) {
-      res = iterator(_rbtree->insert(value));
+      res = iterator(_rbtree->insertNode(value));
       _size++;
       return ft::make_pair<iterator, bool>(res, true);
     } else {
@@ -158,22 +160,29 @@ class Map {
     }
   };
 
-  void erase(iterator pos) {
-    _rbtree->deleteKey((*pos).first);
+  void erase(iterator pos,
+             typename ft::enable_if<!ft::is_integral<iterator>::value,
+                                    iterator>::type* = nullptr) {
+    _rbtree->deleteNode(*pos);
     _size--;
   };
 
-  void erase(iterator first, iterator last) {
+  void erase(iterator first, iterator last,
+             typename ft::enable_if<!ft::is_integral<iterator>::value,
+                                    iterator>::type* = nullptr) {
     while (first != last) {
       erase(first++);
     }
   }
 
   size_type erase(const key_type& key) {
-    iterator res = find(key);
-    if (res != end()) {
-      _rbtree->deleteKey(key);
-      _size--;
+    // std::cout << "Erase1\n";
+    iterator pos = find(key);
+    // std::cout << "Erase2\n";
+    if (pos != end()) {
+      // std::cout << "Erase3\n";
+      erase(pos);
+      // std::cout << "Erase4\n";
       return 1;
     } else {
       return 0;
@@ -186,21 +195,11 @@ class Map {
   size_type count(const Key& key) const { return find(key) != end(); };
 
   iterator find(const Key& key) {
-    Node<const key_type, mapped_type>* res = _rbtree->search(key);
-    if (res == nullptr) {
-      return end();
-    } else {
-      return iterator(res);
-    }
+    return _rbtree->search(ft::make_pair(key, mapped_type()));
   };
 
   const_iterator find(const Key& key) const {
-    Node<const key_type, mapped_type>* res = _rbtree->search(key);
-    if (res == nullptr) {
-      return end();
-    } else {
-      return const_iterator(res);
-    }
+    return _rbtree->search(ft::make_pair(key, mapped_type()));
   }
 
   // ft::Pair<iterator, iterator> equal_range(const Key& key);
@@ -235,7 +234,7 @@ class Map {
   size_type _size;
   key_compare _compare;
   allocator_type _alloc;
-  RBTree<key_type, mapped_type>* _rbtree;
+  RBTree<value_type>* _rbtree;
 };
 
 }  // namespace ft

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pair.hpp                                           :+:      :+:    :+:   */
+/*   Pair.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 19:51:49 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/04 21:13:22 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:23:52 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ struct Pair {
   typedef T2 second_type;
 
   Pair() : first(), second(){};
-  Pair(const first_type& x, const second_type& y) : first(x), second(y){};
+  Pair(first_type& x, second_type& y) : first(x), second(y){};
 
   template <class U1, class U2>
   Pair(const Pair<U1, U2>& p) : first(p.first), second(p.second){};
