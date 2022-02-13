@@ -21,7 +21,6 @@ std::vector<int> copy_constructor_test(std::map<T, V> mp) {
 template <class T, class V>
 std::vector<int> copy_constructor_test(_map<T, V> mp) {
   std::vector<int> v;
-
   for (int i = 0, j = 10; i < 30 * _ratio; ++i, ++j) {
     mp.insert(_make_pair(i, j));
   }

@@ -63,6 +63,7 @@ int run_map_unit_test(std::string test_name, std::vector<int> (func1)(std::map<T
 	printElement(test_name);
 	res1 = func1(map);
 	res2 = func2(my_map);
+
 	if (res1 == res2) {
 	    printElement("OK");
 	    result = 0;

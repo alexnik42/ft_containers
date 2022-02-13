@@ -1,59 +1,12 @@
-In file included from ../map_tests/constructor.cpp:1:
-In file included from ../map_tests/../system/system_methods.ipp:3:
-In file included from ../map_tests/../system/lib.hpp:30:
-../map_tests/../system/Alloc.hpp:55:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
-template <class _Up, class... _Args>
-                          ^
-../map_tests/../system/Alloc.hpp:58:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
-        construct(_Up* __p, _Args&&... __args)
-                                 ^
-../map_tests/../system/Alloc.hpp:164:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
-template <class _Up, class... _Args>
-                          ^
-../map_tests/../system/Alloc.hpp:167:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
-        construct(_Up* __p, _Args&&... __args)
-                                 ^
-In file included from ../map_tests/constructor.cpp:2:
+In file included from ../map_tests/insert(hint).cpp:2:
 In file included from ../map_tests/__service.ipp:3:
-../map_tests/../../../Map.hpp:79:14: error: no viable conversion from 'RBTreeIterator<const Pair<...>>' to 'RBTreeIterator<Pair<...>>'
-    iterator first = other.begin();
-             ^       ~~~~~~~~~~~~~
-../map_tests/../../../Map.hpp:73:11: note: in instantiation of member function 'ft::Map<int, int>::operator=' requested here
-    *this = other;
-          ^
-../map_tests/__service.ipp:65:15: note: in instantiation of member function 'ft::Map<int, int>::Map' requested here
-        res2 = func2(my_map);
-                     ^
-../map_tests/constructor.cpp:40:8: note: in instantiation of function template specialization 'run_map_unit_test<int, int>' requested here
-  exit(run_map_unit_test<int, int>(
-       ^
-../map_tests/../../../utils/iterator.hpp:249:3: note: candidate constructor not viable: no known conversion from 'ft::Map<int, int>::const_iterator' (aka 'RBTreeIterator<const Pair<const int, int> >') to 'ft::RBTreeIterator<ft::Pair<const int, int> >::node_pointer' (aka 'Node<ft::Pair<const int, int> > *') for 1st argument
-  RBTreeIterator(node_pointer ptr) : _ptr(ptr){};
-  ^
-../map_tests/../../../utils/iterator.hpp:250:3: note: candidate constructor not viable: no known conversion from 'ft::Map<int, int>::const_iterator' (aka 'RBTreeIterator<const Pair<const int, int> >') to 'const ft::RBTreeIterator<ft::Pair<const int, int> > &' for 1st argument
-  RBTreeIterator(const RBTreeIterator& other) { *this = other; };
-  ^
-In file included from ../map_tests/constructor.cpp:2:
-In file included from ../map_tests/__service.ipp:3:
-../map_tests/../../../Map.hpp:119:41: error: no viable conversion from returned value of type 'RBTreeIterator<Pair<...>>' to function return type 'RBTreeIterator<const Pair<...>>'
-  const_iterator begin() const { return _rbtree->begin(); };
-                                        ^~~~~~~~~~~~~~~~
-../map_tests/../../../Map.hpp:79:28: note: in instantiation of member function 'ft::Map<int, int>::begin' requested here
-    iterator first = other.begin();
-                           ^
-../map_tests/../../../Map.hpp:73:11: note: in instantiation of member function 'ft::Map<int, int>::operator=' requested here
-    *this = other;
-          ^
-../map_tests/__service.ipp:65:15: note: in instantiation of member function 'ft::Map<int, int>::Map' requested here
-        res2 = func2(my_map);
-                     ^
-../map_tests/constructor.cpp:40:8: note: in instantiation of function template specialization 'run_map_unit_test<int, int>' requested here
-  exit(run_map_unit_test<int, int>(
-       ^
-../map_tests/../../../utils/iterator.hpp:249:3: note: candidate constructor not viable: no known conversion from 'ft::RBTree<ft::Pair<const int, int> >::iterator' (aka 'RBTreeIterator<ft::Pair<const int, int> >') to 'ft::RBTreeIterator<const ft::Pair<const int, int> >::node_pointer' (aka 'Node<const ft::Pair<const int, int> > *') for 1st argument
-  RBTreeIterator(node_pointer ptr) : _ptr(ptr){};
-  ^
-../map_tests/../../../utils/iterator.hpp:250:3: note: candidate constructor not viable: no known conversion from 'ft::RBTree<ft::Pair<const int, int> >::iterator' (aka 'RBTreeIterator<ft::Pair<const int, int> >') to 'const ft::RBTreeIterator<const ft::Pair<const int, int> > &' for 1st argument
-  RBTreeIterator(const RBTreeIterator& other) { *this = other; };
-  ^
-4 warnings and 2 errors generated.
+../map_tests/../../../Map.hpp:162:71: warning: control reaches end of non-void function [-Wreturn-type]
+  iterator insert(iterator, const value_type& value) { insert(value); }
+                                                                      ^
+../map_tests/insert(hint).cpp:27:12: note: in instantiation of member function 'ft::Map<int, int, std::__1::less<int>, std::__1::allocator<ft::Pair<const int, int> > >::insert' requested here
+        mp.insert(it, _make_pair(i, j));
+           ^
+../map_tests/insert(hint).cpp:40:69: note: in instantiation of function template specialization 'insert_test_3<int, int>' requested here
+    exit(run_map_unit_test<int, int>("insert(hint)", insert_test_3, insert_test_3));
+                                                                    ^
+1 warning generated.

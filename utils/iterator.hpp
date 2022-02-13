@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:44:11 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/12 16:26:04 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/13 04:37:48 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,29 +225,26 @@ class ReverseIterator {
   pointer _ptr;
 };
 
-template <typename T>
+template <typename T, typename U>
 class RBTreeIterator {
  public:
   typedef typename std::bidirectional_iterator_tag iterator_category;
-
-  typedef Node<T> node;
-  typedef node* node_pointer;
-
   typedef std::ptrdiff_t difference_type;
-  
+
   typedef T value_type;
   typedef value_type* pointer;
-  typedef const value_type* const_pointer;
   typedef value_type& reference;
-  typedef const value_type& const_reference;
+
+  typedef U Node;
 
  private:
-  node_pointer _ptr;
+  Node* _ptr;
 
  public:
   RBTreeIterator() : _ptr(nullptr){};
-  RBTreeIterator(node_pointer ptr) : _ptr(ptr){};
-  RBTreeIterator(const RBTreeIterator& other) { *this = other; };
+  RBTreeIterator(Node* ptr) : _ptr(ptr){};
+  RBTreeIterator(const RBTreeIterator& other) : _ptr(other._ptr){};
+  ~RBTreeIterator(){};
 
   RBTreeIterator& operator=(const RBTreeIterator& other) {
     _ptr = other._ptr;
@@ -257,22 +254,14 @@ class RBTreeIterator {
   reference operator*() { return _ptr->data; }
   pointer operator->() { return &(_ptr->data); }
 
-  const_reference operator*() const { return _ptr->data; }
-  const_pointer operator->() const { return &(_ptr->data); }
-
   RBTreeIterator operator++() {
-    // std::cout << "increment\n";
     _ptr = successor(_ptr);
-    // std::cout << "ptr: " << _ptr << std::endl;
-    // std::cout << "increment2\n";
     return *this;
   }
 
   RBTreeIterator operator++(int) {
     RBTreeIterator tmp = *this;
     operator++();
-    // std::cout << "increment3\n";
-    // std::cout << "tmp: " << (*tmp).first << std::endl;
     return tmp;
   }
 
@@ -307,25 +296,25 @@ class RBTreeIterator {
   }
 
  private:
-  node_pointer getMinElementOnThePath(node_pointer node) {
+  Node* getMinElementOnThePath(Node* node) {
     while (node && node->left) {
       node = node->left;
     }
     return node;
   }
 
-  node_pointer getMaxElementOnThePath(node_pointer node) {
+  Node* getMaxElementOnThePath(Node* node) {
     while (node && node->right) {
       node = node->right;
     }
     return node;
   }
 
-  node_pointer predecessor(node_pointer node) {
+  Node* predecessor(Node* node) {
     if (node->left) {
       return getMaxElementOnThePath(node->left);
     } else {
-      node_pointer parent = node->parent;
+      Node* parent = node->parent;
       while (node == parent->left) {
         node = parent;
         parent = parent->parent;
@@ -334,14 +323,11 @@ class RBTreeIterator {
     }
   }
 
-  node_pointer successor(node_pointer node) {
+  Node* successor(Node* node) {
     if (node->right) {
-      // std::cout << "Child?\n";
       return getMinElementOnThePath(node->right);
     } else {
-      // std::cout << "Parent?\n";
-      node_pointer parent = node->parent;
-      // std::cout << "Parent: " << parent << std::endl;
+      Node* parent = node->parent;
       while (node == parent->right) {
         node = parent;
         parent = parent->parent;

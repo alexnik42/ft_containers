@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 02:13:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/12 23:37:21 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/13 04:13:52 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@
 
 namespace ft {
 
-template <typename T>
-struct Node;
-template <typename T>
-class RBTree;
-template <typename T>
+template <typename T, typename U>
 class RBTreeIterator;
 
 template <typename T>
@@ -46,8 +42,8 @@ class RBTree {
  public:
   typedef Node<T> Node;
   typedef T Pair;
-  typedef ft::RBTreeIterator<T> iterator;
-  typedef ft::RBTreeIterator<const T> const_iterator;
+  typedef ft::RBTreeIterator<T, Node> iterator;
+  typedef ft::RBTreeIterator<const T, const Node> const_iterator;
 
  private:
   Node *_superRoot;
@@ -58,21 +54,15 @@ class RBTree {
     _superRoot = new Node(Pair());
   };
 
-  iterator begin() { return iterator(getBegin()); };
-  const_iterator begin() const { return const_iterator(getBegin()); };
-
-  iterator end() { return iterator(getEnd()); };
-  const_iterator end() const { return const_iterator(getEnd()); };
-
   // Search RBTree
   iterator search(const Pair &data) {
     Node *res = searchHelp(data, _root);
-    return iterator(res);
+    return res ? iterator(res) : end();
   }
 
   const_iterator search(const Pair &data) const {
     Node *res = searchHelp(data, _root);
-    return const_iterator(res);
+    return res ? const_iterator(res) : end();
   }
 
   Node *searchHelp(const Pair &data, Node *root) {
@@ -92,7 +82,6 @@ class RBTree {
     if (_root != nullptr) {
       _root->parent = nullptr;
     }
-
     Node *inserted_node = new Node(data);
     if (_root == nullptr) {
       _root = inserted_node;
@@ -179,9 +168,7 @@ class RBTree {
   }
 
   // Delete
-  void deleteNode(const Pair &data) {
-    return;
-  }
+  void deleteNode(const Pair &data) { return; }
 
   // Utils
   Node *getMinimum(Node *root) {
@@ -209,6 +196,7 @@ class RBTree {
     }
     return node;
   }
+
   Node *getMaxNode() {
     if (_root == nullptr) {
       return _superRoot;
@@ -220,7 +208,31 @@ class RBTree {
     return node;
   }
 
-  Node *getBegin() { return getMinNode(); };
+  iterator begin() {
+    if (_root == nullptr) {
+      return _superRoot;
+    }
+    Node *node = _root;
+    while (node && node->left != nullptr) {
+      node = node->left;
+    }
+    return iterator(node);
+  };
+
+  const_iterator begin() const {
+    if (_root == nullptr) {
+      return _superRoot;
+    }
+    Node *node = _root;
+    while (node && node->left != nullptr) {
+      node = node->left;
+    }
+    return const_iterator(node);
+  };
+
+  iterator end() { return iterator(_superRoot); };
+  const_iterator end() const { return const_iterator(_superRoot); };
+
   Node *getEnd() { return _superRoot; };
 
  private:
