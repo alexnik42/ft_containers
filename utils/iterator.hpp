@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:44:11 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/13 04:37:48 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/15 21:31:16 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,8 +251,17 @@ class RBTreeIterator {
     return *this;
   };
 
+  template <typename T1, typename U1>
+  RBTreeIterator(const RBTreeIterator<T1, U1>& other) : _ptr(other._ptr){};
+
+  template <typename T1, typename U1>
+  friend class RBTreeIterator;
+
   reference operator*() { return _ptr->data; }
   pointer operator->() { return &(_ptr->data); }
+
+  reference operator*() const { return _ptr->data; }
+  pointer operator->() const { return &(_ptr->data); }
 
   RBTreeIterator operator++() {
     _ptr = successor(_ptr);
@@ -282,18 +291,6 @@ class RBTreeIterator {
   friend bool operator!=(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
     return lhs._ptr != rhs._ptr;
   }
-  friend bool operator<(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
-    return lhs._ptr < rhs._ptr;
-  }
-  friend bool operator<=(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
-    return lhs._ptr <= rhs._ptr;
-  }
-  friend bool operator>(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
-    return lhs._ptr < rhs._ptr;
-  }
-  friend bool operator>=(const RBTreeIterator& lhs, const RBTreeIterator& rhs) {
-    return lhs._ptr < rhs._ptr;
-  }
 
  private:
   Node* getMinElementOnThePath(Node* node) {
@@ -315,7 +312,7 @@ class RBTreeIterator {
       return getMaxElementOnThePath(node->left);
     } else {
       Node* parent = node->parent;
-      while (node == parent->left) {
+      while (parent && node == parent->left) {
         node = parent;
         parent = parent->parent;
       }
@@ -328,7 +325,7 @@ class RBTreeIterator {
       return getMinElementOnThePath(node->right);
     } else {
       Node* parent = node->parent;
-      while (node == parent->right) {
+      while (parent && node == parent->right) {
         node = parent;
         parent = parent->parent;
       }
@@ -337,39 +334,42 @@ class RBTreeIterator {
   }
 };
 
-template <typename T>
+template <typename T, typename U>
 class RBTreeReverseIterator {
  public:
   typedef typename std::bidirectional_iterator_tag iterator_category;
-
-  typedef Node<T> node;
-  typedef node* node_pointer;
-
   typedef std::ptrdiff_t difference_type;
 
-  typedef T* pointer;
-  typedef const T* const_pointer;
-  typedef T& reference;
-  typedef const T& const_reference;
+  typedef T value_type;
+  typedef value_type* pointer;
+  typedef value_type& reference;
+
+  typedef U Node;
 
  private:
-  node_pointer _ptr;
+  Node* _ptr;
 
  public:
   RBTreeReverseIterator() : _ptr(nullptr){};
-  RBTreeReverseIterator(node_pointer ptr) : _ptr(ptr){};
-  RBTreeReverseIterator(const RBTreeReverseIterator& other) { *this = other; };
+  RBTreeReverseIterator(Node* ptr) : _ptr(ptr){};
+  RBTreeReverseIterator(const RBTreeReverseIterator& other)
+      : _ptr(other._ptr){};
+  ~RBTreeReverseIterator(){};
 
   RBTreeReverseIterator& operator=(const RBTreeReverseIterator& other) {
     _ptr = other._ptr;
     return *this;
   };
 
+  template <typename T1, typename U1>
+  friend class RBTreeReverseIterator;
+
+  template <typename T1, typename U1>
+  RBTreeReverseIterator(const RBTreeReverseIterator<T1, U1>& other)
+      : _ptr(other._ptr){};
+
   reference operator*() { return _ptr->data; }
   pointer operator->() { return &(_ptr->data); }
-
-  const_reference operator*() const { return _ptr->data; }
-  const_pointer operator->() const { return &(_ptr->data); }
 
   RBTreeReverseIterator operator++() {
     _ptr = predecessor(_ptr);
@@ -403,26 +403,26 @@ class RBTreeReverseIterator {
   }
 
  private:
-  node_pointer getMinElementOnThePath(node_pointer node) {
-    while (node->left) {
+  Node* getMinElementOnThePath(Node* node) {
+    while (node && node->left) {
       node = node->left;
     }
     return node;
   }
 
-  node_pointer getMaxElementOnThePath(node_pointer node) {
-    while (node->right) {
+  Node* getMaxElementOnThePath(Node* node) {
+    while (node && node->right) {
       node = node->right;
     }
     return node;
   }
 
-  node_pointer predecessor(node_pointer node) {
+  Node* predecessor(Node* node) {
     if (node->left) {
       return getMaxElementOnThePath(node->left);
     } else {
-      node_pointer parent = node->parent;
-      while (node == parent->left) {
+      Node* parent = node->parent;
+      while (parent && node == parent->left) {
         node = parent;
         parent = parent->parent;
       }
@@ -430,12 +430,12 @@ class RBTreeReverseIterator {
     }
   }
 
-  node_pointer successor(node_pointer node) {
+  Node* successor(Node* node) {
     if (node->right) {
       return getMinElementOnThePath(node->right);
     } else {
-      node_pointer parent = node->parent;
-      while (node == parent->right) {
+      Node* parent = node->parent;
+      while (parent && node == parent->right) {
         node = parent;
         parent = parent->parent;
       }

@@ -97,7 +97,6 @@ std::vector<int> comparator_test(_map<T, V> mp) {
     g_start1 = timer();
     g_end1 = timer();
     v.push_back(mp1.size());
-
     return v;
 }
 

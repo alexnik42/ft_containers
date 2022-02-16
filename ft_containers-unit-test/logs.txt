@@ -1,12 +1,18 @@
-In file included from ../map_tests/insert(hint).cpp:2:
-In file included from ../map_tests/__service.ipp:3:
-../map_tests/../../../Map.hpp:162:71: warning: control reaches end of non-void function [-Wreturn-type]
-  iterator insert(iterator, const value_type& value) { insert(value); }
-                                                                      ^
-../map_tests/insert(hint).cpp:27:12: note: in instantiation of member function 'ft::Map<int, int, std::__1::less<int>, std::__1::allocator<ft::Pair<const int, int> > >::insert' requested here
-        mp.insert(it, _make_pair(i, j));
-           ^
-../map_tests/insert(hint).cpp:40:69: note: in instantiation of function template specialization 'insert_test_3<int, int>' requested here
-    exit(run_map_unit_test<int, int>("insert(hint)", insert_test_3, insert_test_3));
-                                                                    ^
-1 warning generated.
+In file included from ../map_tests/operator >=.cpp:1:
+In file included from ../map_tests/../system/system_methods.ipp:3:
+In file included from ../map_tests/../system/lib.hpp:30:
+../map_tests/../system/Alloc.hpp:55:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
+template <class _Up, class... _Args>
+                          ^
+../map_tests/../system/Alloc.hpp:58:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
+        construct(_Up* __p, _Args&&... __args)
+                                 ^
+../map_tests/../system/Alloc.hpp:164:27: warning: variadic templates are a C++11 extension [-Wc++11-extensions]
+template <class _Up, class... _Args>
+                          ^
+../map_tests/../system/Alloc.hpp:167:34: warning: rvalue references are a C++11 extension [-Wc++11-extensions]
+        construct(_Up* __p, _Args&&... __args)
+                                 ^
+4 warnings generated.
+ed.
+.
