@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:19:27 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 14:36:18 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:34:15 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,10 @@ class Map {
    **=========================================================================
    */
 
-  void clear() { _rbtree.clear(); };
+  void clear() {
+    _rbtree.clear();
+    _size = 0;
+  };
 
   ft::Pair<iterator, bool> insert(const value_type& value) {
     iterator res = find(value.first);

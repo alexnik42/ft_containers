@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 02:13:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 17:21:30 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:40:36 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ class RBTree {
    **=========================================================================
    */
 
-  void clear() { clearHelper(_root); }
+  void clear() {
+    clearHelper(_root);
+    _root = nullptr;
+  }
 
   void clearHelper(Node *curr) {
     if (curr == nullptr || curr == _dummyRoot) {
