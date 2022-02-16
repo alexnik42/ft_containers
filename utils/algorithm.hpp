@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 22:08:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 18:08:38 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:04:03 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGORITHM_HPP
 #define ALGORITHM_HPP
+
+#include <iostream>
 
 namespace ft {
 

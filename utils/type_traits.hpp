@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:40:57 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 18:13:14 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:04:45 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPE_TRAITS_HPP
 #define TYPE_TRAITS_HPP
+
+#include <iostream>
 
 namespace ft {
 

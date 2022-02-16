@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 19:51:49 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 18:11:45 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:04:34 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PAIR_HPP
 #define PAIR_HPP
+
+#include <iostream>
 
 namespace ft {
 

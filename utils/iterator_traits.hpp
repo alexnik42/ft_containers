@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:31:06 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 18:09:12 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:03:32 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_TRAITS_HPP
 #define ITERATOR_TRAITS_HPP
+
+#include <iostream>
 
 namespace ft {
 

@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:22:54 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 19:24:11 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:04:24 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_HPP
 #define NODE_HPP
+
+#include <iostream>
 
 #define RED 1
 #define BLACK 0
