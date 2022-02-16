@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 18:23:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 20:02:23 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/17 01:28:47 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ class Set {
       typename ft::iterator_traits<iterator>::difference_type difference_type;
   typedef typename allocator_type::size_type size_type;
 
+  typedef typename allocator_type::template rebind<
+      RBTreeSet<value_type, key_compare, allocator_type> >::other treeAllocator;
+
   typedef typename allocator_type::reference reference;
   typedef typename allocator_type::const_reference const_reference;
   typedef typename allocator_type::pointer pointer;
@@ -59,21 +62,32 @@ class Set {
   size_type _size;
   key_compare _compare;
   allocator_type _alloc;
-  RBTreeSet<value_type, key_compare, allocator_type> _rbtree;
+  treeAllocator _treeAllocator;
+  RBTreeSet<value_type, key_compare, allocator_type>* _rbtree;
 
  public:
   Set()
       : _size(0),
         _compare(key_compare()),
         _alloc(allocator_type()),
-        _rbtree(RBTreeSet<value_type, key_compare, allocator_type>()){};
+        _treeAllocator(treeAllocator()),
+        _rbtree(NULL) {
+    _rbtree = _treeAllocator.allocate(1);
+    _treeAllocator.construct(
+        _rbtree, RBTreeSet<value_type, key_compare, allocator_type>());
+  };
 
   explicit Set(const key_compare& comp,
                const allocator_type& alloc = allocator_type())
       : _size(0),
         _compare(comp),
         _alloc(alloc),
-        _rbtree(RBTreeSet<value_type, key_compare, allocator_type>()){};
+        _treeAllocator(treeAllocator()),
+        _rbtree(NULL) {
+    _rbtree = _treeAllocator.allocate(1);
+    _treeAllocator.construct(
+        _rbtree, RBTreeSet<value_type, key_compare, allocator_type>());
+  };
 
   template <class InputIt>
   Set(InputIt first, InputIt last, const key_compare& comp = key_compare(),
@@ -81,7 +95,11 @@ class Set {
       : _size(0),
         _compare(comp),
         _alloc(alloc),
-        _rbtree(RBTreeSet<value_type, key_compare, allocator_type>()) {
+        _treeAllocator(treeAllocator()),
+        _rbtree(NULL) {
+    _rbtree = _treeAllocator.allocate(1);
+    _treeAllocator.construct(
+        _rbtree, RBTreeSet<value_type, key_compare, allocator_type>());
     insert(first, last);
   };
 
@@ -89,18 +107,29 @@ class Set {
       : _size(0),
         _compare(other._compare),
         _alloc(other._alloc),
-        _rbtree(RBTreeSet<value_type, key_compare, allocator_type>()) {
+        _rbtree(nullptr) {
     *this = other;
   };
 
-  ~Set(){};
+  ~Set() {
+    _treeAllocator.destroy(_rbtree);
+    _treeAllocator.deallocate(_rbtree, 1);
+  };
 
   Set& operator=(const Set& other) {
     if (this != &other) {
+      if (_rbtree) {
+        _treeAllocator.destroy(_rbtree);
+        _treeAllocator.deallocate(_rbtree, 1);
+      }
+      _rbtree = _treeAllocator.allocate(1);
+      _treeAllocator.construct(
+          _rbtree, RBTreeSet<value_type, key_compare, allocator_type>());
       _size = other._size;
       _compare = other._compare;
       _alloc = other._alloc;
-      _rbtree = other._rbtree;
+      _treeAllocator = other._treeAllocator;
+      *_rbtree = *(other._rbtree);
     }
     return *this;
   };
@@ -113,17 +142,17 @@ class Set {
    **=========================================================================
    */
 
-  iterator begin() { return _rbtree.begin(); };
-  const_iterator begin() const { return _rbtree.begin(); };
+  iterator begin() { return _rbtree->begin(); };
+  const_iterator begin() const { return _rbtree->begin(); };
 
-  iterator end() { return _rbtree.end(); };
-  const_iterator end() const { return _rbtree.end(); };
+  iterator end() { return _rbtree->end(); };
+  const_iterator end() const { return _rbtree->end(); };
 
-  reverse_iterator rbegin() { return _rbtree.rbegin(); };
-  const_reverse_iterator rbegin() const { return _rbtree.begin(); };
+  reverse_iterator rbegin() { return _rbtree->rbegin(); };
+  const_reverse_iterator rbegin() const { return _rbtree->begin(); };
 
-  reverse_iterator rend() { return _rbtree.rend(); };
-  const_reverse_iterator rend() const { return _rbtree.rend(); };
+  reverse_iterator rend() { return _rbtree->rend(); };
+  const_reverse_iterator rend() const { return _rbtree->rend(); };
 
   /*
    **=========================================================================
@@ -142,14 +171,14 @@ class Set {
    */
 
   void clear() {
-    _rbtree.clear();
+    _rbtree->clear();
     _size = 0;
   };
 
   ft::Pair<iterator, bool> insert(const value_type& value) {
     iterator res = find(value);
     if (res == end()) {
-      res = iterator(_rbtree.insertNode(value));
+      res = iterator(_rbtree->insertNode(value));
       _size++;
       return ft::make_pair<iterator, bool>(res, true);
     } else {
@@ -173,7 +202,7 @@ class Set {
   void erase(iterator pos,
              typename ft::enable_if<!ft::is_integral<iterator>::value,
                                     iterator>::type* = NULL) {
-    _rbtree.deleteNode(*pos);
+    _rbtree->deleteNode(*pos);
     _size--;
   };
 
@@ -199,16 +228,19 @@ class Set {
     size_type tmpSize = _size;
     key_compare tmpCompare = _compare;
     allocator_type tmpAlloc = _alloc;
-    RBTreeSet<value_type, key_compare, allocator_type> tmpRbtree = _rbtree;
+    treeAllocator tmpTreeAllocator = _treeAllocator;
+    RBTreeSet<value_type, key_compare, allocator_type>* tmpRbtree = _rbtree;
 
     _size = other._size;
     _compare = other._compare;
     _alloc = other._alloc;
+    _treeAllocator = other._treeAllocator;
     _rbtree = other._rbtree;
 
     other._size = tmpSize;
     other._compare = tmpCompare;
     other._alloc = tmpAlloc;
+    other._treeAllocator = tmpTreeAllocator;
     other._rbtree = tmpRbtree;
   };
 
@@ -222,8 +254,8 @@ class Set {
     return static_cast<size_type>(find(key) != end());
   };
 
-  iterator find(const Key& key) { return _rbtree.search(key); };
-  const_iterator find(const Key& key) const { return _rbtree.search(key); };
+  iterator find(const Key& key) { return _rbtree->search(key); };
+  const_iterator find(const Key& key) const { return _rbtree->search(key); };
 
   ft::Pair<iterator, iterator> equal_range(const Key& key) {
     return ft::make_pair(lower_bound(key), upper_bound(key));
@@ -233,14 +265,14 @@ class Set {
     return ft::make_pair(lower_bound(key), upper_bound(key));
   };
 
-  iterator lower_bound(const Key& key) { return _rbtree.lower_bound(key); };
+  iterator lower_bound(const Key& key) { return _rbtree->lower_bound(key); };
   const_iterator lower_bound(const Key& key) const {
-    return _rbtree.lower_bound(key);
+    return _rbtree->lower_bound(key);
   };
 
-  iterator upper_bound(const Key& key) { return _rbtree.upper_bound(key); };
+  iterator upper_bound(const Key& key) { return _rbtree->upper_bound(key); };
   const_iterator upper_bound(const Key& key) const {
-    return _rbtree.upper_bound(key);
+    return _rbtree->upper_bound(key);
   };
 
   /*

@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:19:27 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 20:02:45 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/17 01:26:56 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ class Map {
       typename ft::iterator_traits<iterator>::difference_type difference_type;
   typedef typename allocator_type::size_type size_type;
 
+  typedef typename allocator_type::template rebind<
+      RBTreeMap<value_type, key_compare, allocator_type> >::other treeAllocator;
+
   typedef typename allocator_type::reference reference;
   typedef typename allocator_type::const_reference const_reference;
   typedef typename allocator_type::pointer pointer;
@@ -74,21 +77,32 @@ class Map {
   size_type _size;
   key_compare _compare;
   allocator_type _alloc;
-  RBTreeMap<value_type, key_compare, allocator_type> _rbtree;
+  treeAllocator _treeAllocator;
+  RBTreeMap<value_type, key_compare, allocator_type>* _rbtree;
 
  public:
   Map()
       : _size(0),
         _compare(key_compare()),
         _alloc(allocator_type()),
-        _rbtree(RBTreeMap<value_type, key_compare, allocator_type>()){};
+        _treeAllocator(treeAllocator()),
+        _rbtree(NULL) {
+    _rbtree = _treeAllocator.allocate(1);
+    _treeAllocator.construct(
+        _rbtree, RBTreeMap<value_type, key_compare, allocator_type>());
+  };
 
   explicit Map(const key_compare& comp,
                const allocator_type& alloc = allocator_type())
       : _size(0),
         _compare(comp),
         _alloc(alloc),
-        _rbtree(RBTreeMap<value_type, key_compare, allocator_type>()){};
+        _treeAllocator(treeAllocator()),
+        _rbtree(NULL) {
+    _rbtree = _treeAllocator.allocate(1);
+    _treeAllocator.construct(
+        _rbtree, RBTreeMap<value_type, key_compare, allocator_type>());
+  };
 
   template <class InputIt>
   Map(InputIt first, InputIt last, const key_compare& comp = key_compare(),
@@ -96,7 +110,11 @@ class Map {
       : _size(0),
         _compare(comp),
         _alloc(alloc),
-        _rbtree(RBTreeMap<value_type, key_compare, allocator_type>()) {
+        _treeAllocator(treeAllocator()),
+        _rbtree(NULL) {
+    _rbtree = _treeAllocator.allocate(1);
+    _treeAllocator.construct(
+        _rbtree, RBTreeMap<value_type, key_compare, allocator_type>());
     insert(first, last);
   };
 
@@ -104,18 +122,30 @@ class Map {
       : _size(0),
         _compare(other._compare),
         _alloc(other._alloc),
-        _rbtree(RBTreeMap<value_type, key_compare, allocator_type>()) {
+        _treeAllocator(treeAllocator()),
+        _rbtree(nullptr) {
     *this = other;
   };
 
-  ~Map(){};
+  ~Map() {
+    _treeAllocator.destroy(_rbtree);
+    _treeAllocator.deallocate(_rbtree, 1);
+  };
 
   Map& operator=(const Map& other) {
     if (this != &other) {
+      if (_rbtree) {
+        _treeAllocator.destroy(_rbtree);
+        _treeAllocator.deallocate(_rbtree, 1);
+      }
+      _rbtree = _treeAllocator.allocate(1);
+      _treeAllocator.construct(
+          _rbtree, RBTreeMap<value_type, key_compare, allocator_type>());
       _size = other._size;
       _compare = other._compare;
       _alloc = other._alloc;
-      _rbtree = other._rbtree;
+      _treeAllocator = other._treeAllocator;
+      *_rbtree = *(other._rbtree);
     }
     return *this;
   };
@@ -129,7 +159,7 @@ class Map {
    */
 
   mapped_type& at(const key_type& key) {
-    iterator res = _rbtree.search(key);
+    iterator res = _rbtree->search(key);
     if (res == end()) {
       throw std::out_of_range("Error: key not found");
     } else {
@@ -137,7 +167,7 @@ class Map {
     }
   };
   const mapped_type& at(const key_type& key) const {
-    iterator res = _rbtree.search(key);
+    iterator res = _rbtree->search(key);
     if (res == end()) {
       throw std::out_of_range("Error: key not found");
     } else {
@@ -146,7 +176,7 @@ class Map {
   };
 
   mapped_type& operator[](const key_type& key) {
-    iterator res = _rbtree.search(key);
+    iterator res = _rbtree->search(key);
     if (res == end()) {
       return (*insert(ft::make_pair(key, mapped_type())).first).second;
     } else {
@@ -160,17 +190,17 @@ class Map {
    **=========================================================================
    */
 
-  iterator begin() { return _rbtree.begin(); };
-  const_iterator begin() const { return _rbtree.begin(); };
+  iterator begin() { return _rbtree->begin(); };
+  const_iterator begin() const { return _rbtree->begin(); };
 
-  iterator end() { return _rbtree.end(); };
-  const_iterator end() const { return _rbtree.end(); };
+  iterator end() { return _rbtree->end(); };
+  const_iterator end() const { return _rbtree->end(); };
 
-  reverse_iterator rbegin() { return _rbtree.rbegin(); };
-  const_reverse_iterator rbegin() const { return _rbtree.begin(); };
+  reverse_iterator rbegin() { return _rbtree->rbegin(); };
+  const_reverse_iterator rbegin() const { return _rbtree->begin(); };
 
-  reverse_iterator rend() { return _rbtree.rend(); };
-  const_reverse_iterator rend() const { return _rbtree.rend(); };
+  reverse_iterator rend() { return _rbtree->rend(); };
+  const_reverse_iterator rend() const { return _rbtree->rend(); };
 
   /*
    **=========================================================================
@@ -189,14 +219,14 @@ class Map {
    */
 
   void clear() {
-    _rbtree.clear();
+    _rbtree->clear();
     _size = 0;
   };
 
   ft::Pair<iterator, bool> insert(const value_type& value) {
     iterator res = find(value.first);
     if (res == end()) {
-      res = iterator(_rbtree.insertNode(value));
+      res = iterator(_rbtree->insertNode(value));
       _size++;
       return ft::make_pair<iterator, bool>(res, true);
     } else {
@@ -220,7 +250,7 @@ class Map {
   void erase(iterator pos,
              typename ft::enable_if<!ft::is_integral<iterator>::value,
                                     iterator>::type* = NULL) {
-    _rbtree.deleteNode((*pos).first);
+    _rbtree->deleteNode((*pos).first);
     _size--;
   };
 
@@ -246,16 +276,19 @@ class Map {
     size_type tmpSize = _size;
     key_compare tmpCompare = _compare;
     allocator_type tmpAlloc = _alloc;
-    RBTreeMap<value_type, key_compare, allocator_type> tmpRbtree = _rbtree;
+    treeAllocator tmpTreeAllocator = _treeAllocator;
+    RBTreeMap<value_type, key_compare, allocator_type>* tmpRbtree = _rbtree;
 
     _size = other._size;
     _compare = other._compare;
     _alloc = other._alloc;
+    _treeAllocator = other._treeAllocator;
     _rbtree = other._rbtree;
 
     other._size = tmpSize;
     other._compare = tmpCompare;
     other._alloc = tmpAlloc;
+    other._treeAllocator = tmpTreeAllocator;
     other._rbtree = tmpRbtree;
   };
 
@@ -269,8 +302,8 @@ class Map {
     return static_cast<size_type>(find(key) != end());
   };
 
-  iterator find(const Key& key) { return _rbtree.search(key); };
-  const_iterator find(const Key& key) const { return _rbtree.search(key); };
+  iterator find(const Key& key) { return _rbtree->search(key); };
+  const_iterator find(const Key& key) const { return _rbtree->search(key); };
 
   ft::Pair<iterator, iterator> equal_range(const Key& key) {
     return ft::make_pair(lower_bound(key), upper_bound(key));
@@ -280,14 +313,14 @@ class Map {
     return ft::make_pair(lower_bound(key), upper_bound(key));
   };
 
-  iterator lower_bound(const Key& key) { return _rbtree.lower_bound(key); };
+  iterator lower_bound(const Key& key) { return _rbtree->lower_bound(key); };
   const_iterator lower_bound(const Key& key) const {
-    return _rbtree.lower_bound(key);
+    return _rbtree->lower_bound(key);
   };
 
-  iterator upper_bound(const Key& key) { return _rbtree.upper_bound(key); };
+  iterator upper_bound(const Key& key) { return _rbtree->upper_bound(key); };
   const_iterator upper_bound(const Key& key) const {
-    return _rbtree.upper_bound(key);
+    return _rbtree->upper_bound(key);
   };
 
   /*

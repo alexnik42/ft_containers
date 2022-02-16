@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 02:13:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 20:04:41 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/17 01:21:55 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ public:
   void clear() {
     clearHelper(_root);
     _root = NULL;
   }
 
+ private:
   void clearHelper(Node *curr) {
     if (curr == NULL || curr == _dummyRoot) {
       return;
@@ -142,6 +144,7 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ public:
   Node *clone(Node *curr, Node *parent, Node *otherDummy) {
     if (curr != NULL && curr != otherDummy) {
       Node *node = _nodeAlloc.allocate(1);
@@ -161,6 +164,7 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ public:
   iterator search(const value_type &key) {
     Node *res = searchHelp(key, _root);
     return res ? iterator(res) : end();
@@ -171,6 +175,7 @@ class RBTreeSet {
     return res ? const_iterator(res) : end();
   }
 
+ private:
   Node *searchHelp(const value_type &key, Node *root) {
     if (root == NULL || root == _dummyRoot) {
       return NULL;
@@ -207,6 +212,7 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ public:
   iterator insertNode(const value_type &data) {
     if (_root != NULL) {
       _root->parent = NULL;
@@ -251,6 +257,7 @@ class RBTreeSet {
     return search(data);
   }
 
+ private:
   void insert_case1(Node *n) {
     if (n->parent == NULL) {
       n->color = BLACK;
@@ -308,6 +315,7 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ public:
   void deleteNode(const value_type &key) {
     if (_root) {
       _root->parent = NULL;
@@ -370,6 +378,7 @@ class RBTreeSet {
     }
   }
 
+ private:
   void delete_case1(Node *n) {
     if (n->parent == NULL) {
       return;
@@ -594,13 +603,13 @@ class RBTreeSet {
     return const_iterator(res);
   };
 
- private:
   /*
    **=========================================================================
    **     Relative nodes
    **=========================================================================
    */
 
+ private:
   Node *grandparent(Node *n) {
     if (n && n->parent && n->parent->parent) {
       return n->parent->parent;
@@ -633,6 +642,7 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ private:
   void rotate_left(Node *n) {
     if (n == NULL) {
       return;
@@ -675,6 +685,7 @@ class RBTreeSet {
    **=========================================================================
    */
 
+ private:
   void replace_node(Node *oldn, Node *newn) {
     if (oldn->parent == NULL) {
       _root = newn;
