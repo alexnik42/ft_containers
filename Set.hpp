@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 18:23:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 19:48:03 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:56:12 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SET_HPP
 #define SET_HPP
+
+#include <iostream>
 
 #include "utils/Pair.hpp"
 #include "utils/algorithm.hpp"

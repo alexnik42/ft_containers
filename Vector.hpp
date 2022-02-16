@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:10:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 18:16:00 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:56:33 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
+
+#include <iostream>
 
 #include "utils/iterator.hpp"
 #include "utils/iterator_traits.hpp"

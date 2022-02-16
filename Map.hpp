@@ -6,12 +6,14 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:19:27 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 19:48:06 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:56:05 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 #define MAP_HPP
+
+#include <iostream>
 
 #include "utils/Pair.hpp"
 #include "utils/algorithm.hpp"
