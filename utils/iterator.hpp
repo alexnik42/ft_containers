@@ -6,14 +6,12 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:44:11 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 18:11:09 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:02:42 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
-
-#include "red_black_tree.hpp"
 
 namespace ft {
 
