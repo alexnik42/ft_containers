@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 22:08:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/15 22:43:08 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:08:38 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #define ALGORITHM_HPP
 
 namespace ft {
+
+/*
+ **=========================================================================
+ **     Equal
+ **=========================================================================
+ */
 
 template <class InputIt1, class InputIt2>
 bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
@@ -25,6 +31,12 @@ bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
   return true;
 }
 
+/*
+ **=========================================================================
+ **     Lexicographical Compare
+ **=========================================================================
+ */
+
 template <class InputIt1, class InputIt2>
 bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
                              InputIt2 last2) {
@@ -35,6 +47,6 @@ bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
   return (first1 == last1) && (first2 != last2);
 }
 
-};  // namespace ft
+}  // namespace ft
 
 #endif

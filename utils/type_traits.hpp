@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:40:57 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/03 23:46:56 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:13:14 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 namespace ft {
 
+/*
+ **=========================================================================
+ **     Enable If
+ **=========================================================================
+ */
+
 template <bool condition, typename T = void>
 struct enable_if {};
 
@@ -22,6 +28,12 @@ template <typename T>
 struct enable_if<true, T> {
   typedef T type;
 };
+
+/*
+ **=========================================================================
+ **     Is Integral
+ **=========================================================================
+ */
 
 template <typename>
 struct is_integral : std::false_type {};
@@ -43,8 +55,6 @@ struct is_integral<int> : std::true_type {};
 template <>
 struct is_integral<long int> : std::true_type {};
 template <>
-struct is_integral<long long int> : std::true_type {};
-template <>
 struct is_integral<unsigned char> : std::true_type {};
 template <>
 struct is_integral<unsigned short int> : std::true_type {};
@@ -52,8 +62,6 @@ template <>
 struct is_integral<unsigned int> : std::true_type {};
 template <>
 struct is_integral<unsigned long int> : std::true_type {};
-template <>
-struct is_integral<unsigned long long int> : std::true_type {};
 
 }  // namespace ft
 

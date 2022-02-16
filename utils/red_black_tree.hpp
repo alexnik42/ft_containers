@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 02:13:10 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 17:40:36 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:12:26 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,27 @@ class RBTreeIterator;
 template <typename T, typename U>
 class RBTreeReverseIterator;
 
+/*
+ **=========================================================================
+ **     Node
+ **=========================================================================
+ */
+
 template <typename T>
 struct Node {
-  Node(T data)
-      : data(data), parent(nullptr), left(nullptr), right(nullptr), color(1){};
+  Node(T data) : data(data), parent(NULL), left(NULL), right(NULL), color(1){};
   T data;
   Node<T> *parent;
   Node<T> *left;
   Node<T> *right;
   int color;  // 1 -> Red, 0 -> Black
 };
+
+/*
+ **=========================================================================
+ **     Red Black Tree
+ **=========================================================================
+ */
 
 template <typename T, typename Compare, typename Allocator>
 class RBTree {
@@ -64,9 +75,9 @@ class RBTree {
 
  public:
   RBTree()
-      : _superRoot(nullptr),
-        _dummyRoot(nullptr),
-        _root(nullptr),
+      : _superRoot(NULL),
+        _dummyRoot(NULL),
+        _root(NULL),
         _alloc(allocator_type()),
         _nodeAlloc(node_allocator()),
         _comp(key_compare()) {
@@ -77,7 +88,7 @@ class RBTree {
   };
 
   RBTree(const RBTree &other)
-      : _superRoot(nullptr), _dummyRoot(nullptr), _root(nullptr) {
+      : _superRoot(NULL), _dummyRoot(NULL), _root(NULL) {
     *this = other;
   };
 
@@ -99,7 +110,7 @@ class RBTree {
       _nodeAlloc.construct(_superRoot, Node(Pair()));
       _dummyRoot = _nodeAlloc.allocate(1);
       _nodeAlloc.construct(_dummyRoot, Node(Pair()));
-      _root = clone(other._root, nullptr, other._dummyRoot);
+      _root = clone(other._root, NULL, other._dummyRoot);
 
       if (_root) {
         _root->parent = _superRoot;
@@ -120,11 +131,11 @@ class RBTree {
 
   void clear() {
     clearHelper(_root);
-    _root = nullptr;
+    _root = NULL;
   }
 
   void clearHelper(Node *curr) {
-    if (curr == nullptr || curr == _dummyRoot) {
+    if (curr == NULL || curr == _dummyRoot) {
       return;
     } else {
       clearHelper(curr->left);
@@ -152,7 +163,7 @@ class RBTree {
    */
 
   Node *clone(Node *curr, Node *parent, Node *otherDummy) {
-    if (curr != nullptr && curr != otherDummy) {
+    if (curr != NULL && curr != otherDummy) {
       Node *node = _nodeAlloc.allocate(1);
       _nodeAlloc.construct(node, Node(curr->data));
       node->parent = parent;
@@ -160,7 +171,7 @@ class RBTree {
       node->right = clone(curr->right, node, otherDummy);
       return node;
     } else {
-      return nullptr;
+      return NULL;
     }
   }
 
@@ -181,8 +192,8 @@ class RBTree {
   }
 
   Node *searchHelp(const key_type &key, Node *root) {
-    if (root == nullptr || root == _dummyRoot) {
-      return nullptr;
+    if (root == NULL || root == _dummyRoot) {
+      return NULL;
     } else {
       bool cmpRes = _comp(key, root->data.first);
       if (root->data.first == key) {
@@ -196,8 +207,8 @@ class RBTree {
   };
 
   Node *searchHelp(const key_type &key, Node *root) const {
-    if (root == nullptr || root == _dummyRoot) {
-      return nullptr;
+    if (root == NULL || root == _dummyRoot) {
+      return NULL;
     } else {
       bool cmpRes = _comp(key, root->data.first);
       if (root->data.first == key) {
@@ -217,15 +228,15 @@ class RBTree {
    */
 
   iterator insertNode(const Pair &data) {
-    if (_root != nullptr) {
-      _root->parent = nullptr;
-      _dummyRoot->parent->left = nullptr;
-      _dummyRoot->parent = nullptr;
+    if (_root != NULL) {
+      _root->parent = NULL;
+      _dummyRoot->parent->left = NULL;
+      _dummyRoot->parent = NULL;
     }
-    _superRoot->left = nullptr;
+    _superRoot->left = NULL;
     Node *inserted_node = _nodeAlloc.allocate(1);
     _nodeAlloc.construct(inserted_node, Node(data));
-    if (_root == nullptr) {
+    if (_root == NULL) {
       _root = inserted_node;
     } else {
       Node *n = _root;
@@ -235,14 +246,14 @@ class RBTree {
           n->data.second = data.second;
           return n;
         } else if (cmpRes) {
-          if (n->left == nullptr) {
+          if (n->left == NULL) {
             n->left = inserted_node;
             break;
           } else {
             n = n->left;
           }
         } else {
-          if (n->right == nullptr) {
+          if (n->right == NULL) {
             n->right = inserted_node;
             break;
           } else {
@@ -262,7 +273,7 @@ class RBTree {
   }
 
   void insert_case1(Node *n) {
-    if (n->parent == nullptr) {
+    if (n->parent == NULL) {
       n->color = 0;
     } else {
       insert_case2(n);
@@ -320,17 +331,17 @@ class RBTree {
 
   void deleteNode(const key_type &key) {
     if (_root) {
-      _root->parent = nullptr;
-      _superRoot->left = nullptr;
-      _dummyRoot->parent->left = nullptr;
-      _dummyRoot->parent = nullptr;
+      _root->parent = NULL;
+      _superRoot->left = NULL;
+      _dummyRoot->parent->left = NULL;
+      _dummyRoot->parent = NULL;
     }
     Node *child;
     Node *n = searchHelp(key, _root);
-    if (n == nullptr) {
+    if (n == NULL) {
       return;
     }
-    if (n->left != nullptr && n->right != nullptr) {
+    if (n->left != NULL && n->right != NULL) {
       Node *pred = getMaximum(n->left);
       bool isLeft = false;
       if (n->parent && n->parent->left == n) {
@@ -363,9 +374,9 @@ class RBTree {
       n->color = tmpColor;
       n = pred;
     }
-    child = n->right == nullptr ? n->left : n->right;
+    child = n->right == NULL ? n->left : n->right;
     if (n->color == 0) {
-      n->color = child != nullptr ? child->color : 0;
+      n->color = child != NULL ? child->color : 0;
       delete_case1(n);
     }
     replace_node(n, child);
@@ -402,8 +413,8 @@ class RBTree {
 
   void delete_case3(Node *n) {
     if (n->parent->color == 0 && sibling(n) && sibling(n)->color == 0 &&
-        (sibling(n)->left == nullptr || sibling(n)->left->color == 0) &&
-        (sibling(n)->right == nullptr || sibling(n)->right->color == 0)) {
+        (sibling(n)->left == NULL || sibling(n)->left->color == 0) &&
+        (sibling(n)->right == NULL || sibling(n)->right->color == 0)) {
       sibling(n)->color = RED;
       delete_case1(n->parent);
     } else {
@@ -413,8 +424,8 @@ class RBTree {
 
   void delete_case4(Node *n) {
     if (n->parent->color == 1 && sibling(n) && sibling(n)->color == 0 &&
-        (sibling(n)->left == nullptr || sibling(n)->left->color == 0) &&
-        (sibling(n)->right == nullptr || sibling(n)->right->color == 0)) {
+        (sibling(n)->left == NULL || sibling(n)->left->color == 0) &&
+        (sibling(n)->right == NULL || sibling(n)->right->color == 0)) {
       sibling(n)->color = 1;
       n->parent->color = 0;
     } else {
@@ -425,13 +436,13 @@ class RBTree {
   void delete_case5(Node *n) {
     if (n == n->parent->left && sibling(n) && sibling(n)->color == 0 &&
         sibling(n)->left && sibling(n)->left->color == 1 &&
-        (sibling(n)->right == nullptr || sibling(n)->right->color == 0)) {
+        (sibling(n)->right == NULL || sibling(n)->right->color == 0)) {
       sibling(n)->color = 1;
       sibling(n)->left->color = 0;
       rotate_right(sibling(n));
     } else if (n == n->parent->right && sibling(n) && sibling(n)->color == 0 &&
                (sibling(n)->right && sibling(n)->right->color == 1) &&
-               (sibling(n)->left == nullptr || sibling(n)->left->color == 0)) {
+               (sibling(n)->left == NULL || sibling(n)->left->color == 0)) {
       sibling(n)->color = 1;
       sibling(n)->right->color = 0;
       rotate_left(sibling(n));
@@ -459,67 +470,65 @@ class RBTree {
 
   /*
    **=========================================================================
-   **     Utils
+   **     Min/max functions
    **=========================================================================
    */
 
+ private:
   Node *getMinimum(Node *root) {
-    while (root && root->left != nullptr && root->left != _dummyRoot) {
+    while (root && root->left != NULL && root->left != _dummyRoot) {
       root = root->left;
     }
     return root;
   }
 
   Node *getMaximum(Node *root) {
-    while (root && root->right != nullptr) {
+    while (root && root->right != NULL) {
       root = root->right;
     }
     return root;
   }
 
   Node *getRoot() { return _root; };
-  Node *getMinNode() {
-    if (_root == nullptr) {
+
+  Node *getBegin() {
+    if (_root == NULL) {
       return _superRoot;
     }
     Node *node = _root;
-    while (node && node->left != nullptr && node->left != _dummyRoot) {
+    while (node && node->left != NULL && node->left != _dummyRoot) {
       node = node->left;
     }
     return node;
   }
 
-  Node *getMinNode() const {
-    if (_root == nullptr) {
+  Node *getBegin() const {
+    if (_root == NULL) {
       return _superRoot;
     }
     Node *node = _root;
-    while (node && node->left != nullptr && node->left != _dummyRoot) {
+    while (node && node->left != NULL && node->left != _dummyRoot) {
       node = node->left;
     }
     return node;
   }
 
-  Node *getMaxNode() {
-    if (_root == nullptr) {
-      return _superRoot;
-    }
-    Node *node = _root;
-    while (node && node->right != nullptr) {
-      node = node->right;
-    }
-    return node;
-  }
+  /*
+   **=========================================================================
+   **     Iterators
+   **=========================================================================
+   */
 
-  iterator begin() { return iterator(getMinNode()); };
+ public:
+  iterator begin() { return iterator(getBegin()); };
 
-  const_iterator begin() const { return const_iterator(getMinNode()); };
+  const_iterator begin() const { return const_iterator(getBegin()); };
 
   iterator end() { return iterator(_superRoot); };
   const_iterator end() const { return const_iterator(_superRoot); };
 
   reverse_iterator rbegin() {
-    if (_root == nullptr) {
+    if (_root == NULL) {
       return reverse_iterator(_dummyRoot);
     }
     reverse_iterator rbegin = reverse_iterator(_superRoot);
@@ -528,7 +537,7 @@ class RBTree {
   };
 
   const_reverse_iterator rbegin() const {
-    if (_root == nullptr) {
+    if (_root == NULL) {
       return reverse_iterator(_dummyRoot);
     }
     const_reverse_iterator rbegin = const_reverse_iterator(_superRoot);
@@ -606,16 +615,22 @@ class RBTree {
   };
 
  private:
+  /*
+   **=========================================================================
+   **     Relative nodes
+   **=========================================================================
+   */
+
   Node *grandparent(Node *n) {
     if (n && n->parent && n->parent->parent) {
       return n->parent->parent;
     } else {
-      return nullptr;
+      return NULL;
     }
   }
   Node *sibling(Node *n) {
-    if (n == nullptr || n->parent == nullptr) {
-      return nullptr;
+    if (n == NULL || n->parent == NULL) {
+      return NULL;
     } else {
       if (n == n->parent->left) {
         return n->parent->right;
@@ -625,15 +640,21 @@ class RBTree {
     }
   };
   Node *uncle(Node *n) {
-    if (n != nullptr && n->parent != nullptr && n->parent->parent != nullptr) {
+    if (n != NULL && n->parent != NULL && n->parent->parent != NULL) {
       return sibling(n->parent);
     } else {
-      return nullptr;
+      return NULL;
     }
   };
 
+  /*
+   **=========================================================================
+   **     Rotation
+   **=========================================================================
+   */
+
   void rotate_left(Node *n) {
-    if (n == nullptr) {
+    if (n == NULL) {
       return;
     }
     Node *r = n->right;
@@ -641,7 +662,7 @@ class RBTree {
     if (n && r) {
       n->right = r->left;
     }
-    if (r && r->left != nullptr) {
+    if (r && r->left != NULL) {
       r->left->parent = n;
     }
     if (r) {
@@ -651,7 +672,7 @@ class RBTree {
   }
 
   void rotate_right(Node *n) {
-    if (n == nullptr) {
+    if (n == NULL) {
       return;
     }
     Node *l = n->left;
@@ -659,7 +680,7 @@ class RBTree {
     if (n && l) {
       n->left = l->right;
     }
-    if (l && l->right != nullptr) {
+    if (l && l->right != NULL) {
       l->right->parent = n;
     }
     if (l) {
@@ -668,8 +689,14 @@ class RBTree {
     n->parent = l;
   }
 
+  /*
+   **=========================================================================
+   **     Replace
+   **=========================================================================
+   */
+
   void replace_node(Node *oldn, Node *newn) {
-    if (oldn->parent == nullptr) {
+    if (oldn->parent == NULL) {
       _root = newn;
     } else {
       if (oldn == oldn->parent->left) {

@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:44:11 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/15 21:31:16 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:11:09 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include "red_black_tree.hpp"
 
 namespace ft {
+
+/*
+ **=========================================================================
+ **     Random Access Iterator
+ **=========================================================================
+ */
 
 template <typename T>
 class RandomAccessIterator {
@@ -28,7 +34,7 @@ class RandomAccessIterator {
   typedef T& reference;
   typedef const T& const_reference;
 
-  RandomAccessIterator() : _ptr(nullptr){};
+  RandomAccessIterator() : _ptr(NULL){};
   RandomAccessIterator(pointer ptr) : _ptr(ptr){};
   RandomAccessIterator(const RandomAccessIterator& other) { *this = other; };
 
@@ -121,6 +127,12 @@ class RandomAccessIterator {
   pointer _ptr;
 };
 
+/*
+ **=========================================================================
+ **     Reverse Iterator
+ **=========================================================================
+ */
+
 template <typename T>
 class ReverseIterator {
  public:
@@ -132,7 +144,7 @@ class ReverseIterator {
   typedef T& reference;
   typedef const T& const_reference;
 
-  ReverseIterator() : _ptr(nullptr){};
+  ReverseIterator() : _ptr(NULL){};
   ReverseIterator(pointer ptr) : _ptr(ptr){};
   ReverseIterator(const ReverseIterator& other) { *this = other; };
 
@@ -225,6 +237,12 @@ class ReverseIterator {
   pointer _ptr;
 };
 
+/*
+ **=========================================================================
+ **     Red Black Tree Iterator
+ **=========================================================================
+ */
+
 template <typename T, typename U>
 class RBTreeIterator {
  public:
@@ -241,7 +259,7 @@ class RBTreeIterator {
   Node* _ptr;
 
  public:
-  RBTreeIterator() : _ptr(nullptr){};
+  RBTreeIterator() : _ptr(NULL){};
   RBTreeIterator(Node* ptr) : _ptr(ptr){};
   RBTreeIterator(const RBTreeIterator& other) : _ptr(other._ptr){};
   ~RBTreeIterator(){};
@@ -334,6 +352,12 @@ class RBTreeIterator {
   }
 };
 
+/*
+ **=========================================================================
+ **     Red Black Tree Reverse Iterator
+ **=========================================================================
+ */
+
 template <typename T, typename U>
 class RBTreeReverseIterator {
  public:
@@ -350,7 +374,7 @@ class RBTreeReverseIterator {
   Node* _ptr;
 
  public:
-  RBTreeReverseIterator() : _ptr(nullptr){};
+  RBTreeReverseIterator() : _ptr(NULL){};
   RBTreeReverseIterator(Node* ptr) : _ptr(ptr){};
   RBTreeReverseIterator(const RBTreeReverseIterator& other)
       : _ptr(other._ptr){};

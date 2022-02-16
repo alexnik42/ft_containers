@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:10:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/11 01:09:11 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:16:00 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ template <typename T, class Allocator = std::allocator<T> >
 class Vector {
  public:
   typedef Allocator allocator_type;
-    typedef ft::RandomAccessIterator<T> iterator;
-    typedef ft::RandomAccessIterator<const T> const_iterator;
-    typedef ft::ReverseIterator<T> reverse_iterator;
-    typedef ft::ReverseIterator<const T> const_reverse_iterator;
+  typedef ft::RandomAccessIterator<T> iterator;
+  typedef ft::RandomAccessIterator<const T> const_iterator;
+  typedef ft::ReverseIterator<T> reverse_iterator;
+  typedef ft::ReverseIterator<const T> const_reverse_iterator;
 
   typedef
       typename ft::iterator_traits<iterator>::difference_type difference_type;
@@ -38,14 +38,14 @@ class Vector {
   typedef typename allocator_type::pointer pointer;
   typedef typename allocator_type::const_pointer const_pointer;
 
-  Vector() : _arr(nullptr), _size(0), _capacity(0){};
+  Vector() : _arr(NULL), _size(0), _capacity(0){};
 
   explicit Vector(const allocator_type& alloc)
-      : _arr(nullptr), _size(0), _capacity(0), _alloc(alloc){};
+      : _arr(NULL), _size(0), _capacity(0), _alloc(alloc){};
 
   explicit Vector(size_type count, const value_type& value = value_type(),
                   const allocator_type& alloc = allocator_type())
-      : _arr(nullptr), _size(0), _capacity(0), _alloc(alloc) {
+      : _arr(NULL), _size(0), _capacity(0), _alloc(alloc) {
     reserve(count);
     _size = count;
     _capacity = count;
@@ -58,8 +58,8 @@ class Vector {
   Vector(InputIt first, InputIt last,
          const allocator_type& alloc = allocator_type(),
          typename ft::enable_if<!ft::is_integral<InputIt>::value,
-                                InputIt>::type* = nullptr)
-      : _arr(nullptr), _size(0), _capacity(0), _alloc(alloc) {
+                                InputIt>::type* = NULL)
+      : _arr(NULL), _size(0), _capacity(0), _alloc(alloc) {
     difference_type range = last - first;
     reserve(range);
     _size = range;
@@ -69,7 +69,7 @@ class Vector {
     }
   };
 
-  Vector(const Vector& other) : _arr(nullptr), _size(0), _capacity(0) {
+  Vector(const Vector& other) : _arr(NULL), _size(0), _capacity(0) {
     *this = other;
   };
 
@@ -102,7 +102,7 @@ class Vector {
   template <class InputIt>
   void assign(InputIt first, InputIt last,
               typename ft::enable_if<!ft::is_integral<InputIt>::value,
-                                     InputIt>::type* = nullptr) {
+                                     InputIt>::type* = NULL) {
     size_type count = static_cast<size_type>(std::distance(first, last));
     if (count > capacity()) {
       reserve(count);
@@ -115,14 +115,19 @@ class Vector {
 
   allocator_type get_allocator() const { return _alloc; };
 
-  // Element access
+  /*
+   **=========================================================================
+   **     Element Access
+   **=========================================================================
+   */
+
   reference at(size_type pos) {
     if (!(pos < size())) {
       throw std::out_of_range("Error: pos is out of range");
     }
     return _arr[pos];
   };
-  
+
   const_reference at(size_type pos) const {
     if (!(pos < size())) {
       throw std::out_of_range("Error: pos is out of range");
@@ -142,7 +147,12 @@ class Vector {
   value_type* data() { return _arr; }
   const value_type* data() const { return _arr; };
 
-  // Iterators
+  /*
+   **=========================================================================
+   **     Iterators
+   **=========================================================================
+   */
+
   iterator begin() { return iterator(_arr); };
   const_iterator begin() const { return const_iterator(_arr); };
 
@@ -159,7 +169,12 @@ class Vector {
     return const_reverse_iterator(_arr - 1);
   };
 
-  // Capacity
+  /*
+   **=========================================================================
+   **     Capacity
+   **=========================================================================
+   */
+
   bool empty() const { return size() == 0; };
   size_type size() const { return _size; };
   size_type max_size() const { return allocator_type().max_size(); };
@@ -186,7 +201,12 @@ class Vector {
 
   size_type capacity() const { return _capacity; };
 
-  // Modifiers
+  /*
+  **=========================================================================
+  **     Modifiers
+  **=========================================================================
+  */
+
   void clear() {
     for (size_type i = 0; i < size(); i++) {
       _alloc.destroy(_arr + i);
@@ -230,7 +250,7 @@ class Vector {
   template <class InputIt>
   void insert(iterator pos, InputIt first, InputIt last,
               typename ft::enable_if<!ft::is_integral<InputIt>::value,
-                                     InputIt>::type* = nullptr) {
+                                     InputIt>::type* = NULL) {
     try {
       InputIt s = first;
       while (s < last) {
@@ -343,7 +363,12 @@ class Vector {
     other._alloc = tmpAlloc;
   };
 
-  // Non-member functions
+  /*
+   **=========================================================================
+   **    Comparison
+   **=========================================================================
+   */
+
   friend bool operator==(const Vector<value_type, allocator_type>& lhs,
                          const Vector<value_type, allocator_type>& rhs) {
     size_t i = 0, j = 0;

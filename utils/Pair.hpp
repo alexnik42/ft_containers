@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 19:51:49 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/15 19:39:38 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:11:45 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #define PAIR_HPP
 
 namespace ft {
+
+/*
+ **=========================================================================
+ **     Pair
+ **=========================================================================
+ */
 
 template <typename T1, typename T2>
 struct Pair {
@@ -43,38 +49,38 @@ struct Pair {
 template <typename T1, typename T2>
 Pair<T1, T2> make_pair(T1 t, T2 u) {
   return Pair<T1, T2>(t, u);
-};
+}
 
 template <typename T1, typename T2>
 bool operator==(const Pair<T1, T2>& lhs, const Pair<T1, T2>& rhs) {
   return lhs.first == rhs.first && lhs.second == rhs.second;
-};
+}
 
 template <typename T1, typename T2>
 bool operator!=(const Pair<T1, T2>& lhs, const Pair<T1, T2>& rhs) {
   return !(lhs == rhs);
-};
+}
 
 template <typename T1, typename T2>
 bool operator<(const Pair<T1, T2>& lhs, const Pair<T1, T2>& rhs) {
   return lhs.first < rhs.first ||
          (lhs.first <= rhs.first && lhs.second < rhs.second);
-};
+}
 
 template <typename T1, typename T2>
 bool operator<=(const Pair<T1, T2>& lhs, const Pair<T1, T2>& rhs) {
   return !(rhs < lhs);
-};
+}
 
 template <typename T1, typename T2>
 bool operator>(const Pair<T1, T2>& lhs, const Pair<T1, T2>& rhs) {
   return rhs < lhs;
-};
+}
 
 template <typename T1, typename T2>
 bool operator>=(const Pair<T1, T2>& lhs, const Pair<T1, T2>& rhs) {
   return !(lhs < rhs);
-};
+}
 
 }  // namespace ft
 

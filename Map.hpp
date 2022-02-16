@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:19:27 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 17:34:15 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:14:27 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ class Map {
 
   /*
    **=========================================================================
-   **     Element access
+   **     Element Access
    **=========================================================================
    */
 
@@ -211,7 +211,7 @@ class Map {
   template <class InputIt>
   void insert(InputIt first, InputIt last,
               typename ft::enable_if<!ft::is_integral<InputIt>::value,
-                                     InputIt>::type* = nullptr) {
+                                     InputIt>::type* = NULL) {
     while (first != last) {
       insert(*first++);
     }
@@ -219,14 +219,14 @@ class Map {
 
   void erase(iterator pos,
              typename ft::enable_if<!ft::is_integral<iterator>::value,
-                                    iterator>::type* = nullptr) {
+                                    iterator>::type* = NULL) {
     _rbtree.deleteNode((*pos).first);
     _size--;
   };
 
   void erase(iterator first, iterator last,
              typename ft::enable_if<!ft::is_integral<iterator>::value,
-                                    iterator>::type* = nullptr) {
+                                    iterator>::type* = NULL) {
     while (first != last) {
       erase(first++);
     }

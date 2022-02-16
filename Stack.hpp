@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:21:44 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/04 01:36:16 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:17:20 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,40 @@ class Stack {
     return *this;
   };
 
+  /*
+   **=========================================================================
+   **     Element Access
+   **=========================================================================
+   */
+
   reference top() { return c.back(); };
   const_reference top() const { return c.back(); };
 
+  /*
+   **=========================================================================
+   **     Capacity
+   **=========================================================================
+   */
+
   bool empty() const { return c.empty(); };
   size_type size() const { return c.size(); };
+
+  /*
+   **=========================================================================
+   **     Modifiers
+   **=========================================================================
+   */
 
   void push(const value_type& value) { c.push_back(value); };
   void push(value_type& value) { c.push_back(value); };
 
   void pop() { c.pop_back(); };
+
+  /*
+   **=========================================================================
+   **     Comparison
+   **=========================================================================
+   */
 
   friend bool operator==(const Stack<value_type, container_type>& lhs,
                          const Stack<value_type, container_type>& rhs) {
