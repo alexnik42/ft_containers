@@ -6,7 +6,7 @@
 /*   By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 02:10:46 by crendeha          #+#    #+#             */
-/*   Updated: 2022/02/16 20:02:55 by crendeha         ###   ########.fr       */
+/*   Updated: 2022/02/17 02:26:52 by crendeha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ class Vector {
     difference_type range = last - first;
     reserve(range);
     _size = range;
-    value_type* ptr = _arr;
     for (size_type i = 0; i < size(); i++) {
       _alloc.construct(_arr + i, *(first++));
     }
