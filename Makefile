@@ -6,7 +6,7 @@
 #    By: crendeha <crendeha@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/23 20:49:40 by crendeha          #+#    #+#              #
-#    Updated: 2022/02/17 03:55:00 by crendeha         ###   ########.fr        #
+#    Updated: 2022/03/17 23:26:05 by crendeha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_FT			=		ft_containers
 OUTFILE_STL		=		"stl.txt"
 OUTFILE_FT		=		"ft.txt"
 
-SRC_PATH		=		./
+SRC_PATH		=		./src/tests/
 SRC_STL 		= 		stl_tests.cpp
 SRC_FT	 		= 		ft_tests.cpp
 
@@ -48,7 +48,7 @@ include $(wildcard $(D_FILES_FT))
 compare			:		
 						./$(NAME_STL) > OUTFILE_STL && ./$(NAME_FT) > OUTFILE_FT && diff OUTFILE_STL OUTFILE_FT ; [ $$? -eq 1 ]
 clean 			: 
-						@rm -f $(OBJ_STL) $(OBJ_FT) $(D_FILES_STL) $(D_FILES_FT) OUTFILE_STL OUTFILE_FT "diff.txt"
+						@rm -f $(OBJ_STL) $(OBJ_FT) $(D_FILES_STL) $(D_FILES_FT) OUTFILE_STL OUTFILE_FT
 
 fclean 			: 		clean
 						@rm -f $(NAME_STL) $(NAME_FT)
