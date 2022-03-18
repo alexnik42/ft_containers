@@ -5,7 +5,7 @@ School 42 Project. My implementation of C++ 98 STL containers
 
 # Final grade: 125/100
 
-<img src="./score.png" height="125" alt="Ship Placement"> <br></br>
+<img src="./score.png" height="125" alt="Score"> <br></br>
 
 ## Containers
 
